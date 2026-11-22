@@ -1,6 +1,6 @@
 # Sparse-view NeRF with a frequency regularisation prior
 
-**Recovery experiment** — Dense Lego reached step 500 on Kaggle. The [current operator stage](recovery/README.md) resumes that checkpoint in a fresh session. The recovery branch includes the checkpoint investigation, both FreeNeRF terms and the published Blender split. The original experiment and pilot instructions follow below.
+**Recovery experiment** — Dense Lego reached step 2,000 after a successful Kaggle checkpoint handoff. The [current operator stage](recovery/README.md) completes the dense training run. The recovery branch includes the checkpoint investigation, both FreeNeRF terms and the published Blender split. The original experiment and pilot instructions follow below.
 
 Train the same hierarchical NeRF on 100 views and on eight views. Then train the eight-view version again with **FreeNeRF frequency annealing**. The experiment measures how much of the observed 100-to-eight-view gap this one intervention recovers on Lego, Chair, and an object you photograph. Each scene gets three checkpoints, held-out PSNR and LPIPS scores, and two matched-camera movies.
 
