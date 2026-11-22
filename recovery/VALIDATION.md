@@ -47,10 +47,29 @@ The operator's full-width diagnostic passed on one Tesla T4 with PyTorch 2.11.0+
 
 On 16 fixed foreground pixels of one training view, the white control scored 2.22 dB. Fine foreground MSE fell from 0.17824 to 0.01944. The preview contains a recognizable, blurred Lego silhouette. Residual density on background rays, especially in the coarse field, merits inspection once more cameras constrain geometry.
 
-The trainer logged 42.94 seconds for 256 updates, or 5.9623 updates/s. Its timer starts after initialization and data caching. This rate projects about 84 seconds for the first 500 dense updates, plus startup, image caching, preview and export. Actual dense throughput and peak GPU memory have yet to be measured. The Stage 0 review ZIP SHA-256 is `92f26aeddffd8c26092cb8eceb2bfa8562d45d1bced8af3c57712dff58fdc63e`.
+The trainer logged 42.94 seconds for 256 updates, or 5.9623 updates/s. Its timer starts after initialization and data caching. This rate projected about 84 seconds for the first 500 dense updates. The Stage 0 review ZIP SHA-256 is `92f26aeddffd8c26092cb8eceb2bfa8562d45d1bced8af3c57712dff58fdc63e`.
+
+## Kaggle dense Lego at step 500
+
+The first 500 updates used 100 training cameras, 400 × 400 images, uniform pixel sampling, seed 42, and the scheduled learning rate for the 50,000-step dense vanilla run. The training loop measured **81.68 seconds**, or **6.1214 updates/s**, on one Tesla T4. The notebook recorded 94.7 seconds through training and preview, before writing the handoff ZIP.
+
+| Fixed training probe across eight cameras | Coarse field | Fine field |
+| --- | ---: | ---: |
+| Foreground PSNR at initialization | 9.37 dB | 9.49 dB |
+| Foreground PSNR at step 500 | 14.70 dB | 14.51 dB |
+| Foreground opacity at step 500 | 0.860 | 0.855 |
+| Background opacity at step 500 | 0.095 | 0.034 |
+| Density-head gradient norm at step 500 | 0.03089 | 0.02359 |
+| Color-head gradient norm at step 500 | 0.05076 | 0.03185 |
+
+These statistics use 128 fixed foreground and 128 fixed background rays in total. The white control scored 4.41 dB on the foreground rays. The preview shows the object's outline and yellow body against a white background, with fine detail still blurred. Held-out PSNR, SSIM and LPIPS remain unmeasured for this run.
+
+The ZIP passed CRC checks, source and data fingerprints matched, and all 48 Adam parameter states contained finite moments at step 500. Both CPU and CUDA RNG states were present. A CPU replay of the uploaded weights reproduced both foreground PSNRs within 0.00003 dB and the reported opacity means within 0.0000001. Run ID `08ff8d2fceda43759554aa6470054853`; checkpoint SHA-256 `0730a3442af623680fa2fe705a5e1dabbe613231238f3840ccc075cb9df66e5b`.
+
+The Stage 2 restore cell was exercised locally using the uploaded snapshot, the original Lego images and a new writable directory. It verified the data and code, loaded the expected run at step 500 and preserved the checkpoint bytes. Local fixtures also exercised the notebook's artifact export after a completed or interrupted training process. Actual CUDA continuation in a fresh Kaggle session is the next operator check.
 
 ## Remaining experimental stages
 
-1. Review the first 500 updates of the 100-view dense Lego run and verify a checkpoint handoff to a fresh Kaggle session. Then measure final held-out performance on the 25-view protocol. The proposal's dense Lego sanity window is 30.54–34.54 dB around the original full-resolution 32.54 dB reference. The different evaluation protocol limits that comparison.
+1. Resume the reviewed step-500 checkpoint on a fresh T4 session and stop at step 2,000 for review. After completing the dense fit, measure final held-out performance on the 25-view protocol. The proposal's dense Lego sanity window is 30.54–34.54 dB around the original full-resolution 32.54 dB reference. The different evaluation protocol limits that comparison.
 2. Complete matched held-out metrics, RGB/depth evidence and videos for the nine main fits. Record the eight-view training PSNR fit check, budget and actual throughput. Compute scene-specific recovery only for supported gaps. The archived dense score and the two failed sparse scores describe the previous backend.
 3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)

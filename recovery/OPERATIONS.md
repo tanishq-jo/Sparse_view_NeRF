@@ -1,8 +1,8 @@
 # Kaggle training and checkpoint handoff
 
-**The operator's Stage 0 passed. The current assignment is the first 500 dense Lego updates.** Import the [Stage 1 notebook](kaggle_stage1_dense500.ipynb) into Kaggle and attach the same private Stage 0 input. It starts a fresh dense vanilla model from seed 42, trains on 100 cameras, saves a recoverable checkpoint, and stops for review. The handoff archive is `lego-dense-vanilla-s42-first-stop.zip`.
+**Current stage — resume dense Lego from step 500 to step 2,000.** Import the [Stage 2 notebook](kaggle_stage2_dense_resume.ipynb) into a fresh Kaggle session. Attach the original private Stage 0 kit and `lego-dense-vanilla-s42-first-stop.zip` as a second private input. Select T4 ×2. Run the cells in order and download `lego-dense-vanilla-s42-step2000.zip` from Output for review. The restore uses the saved manifest, model, optimizer and RNG states. Check that training starts at step 500.
 
-Stage 0 measured 5.96 updates/s on one T4. At that rate, 500 updates take approximately 84 seconds, plus setup, data caching, preview and export. Fine foreground PSNR rose from 7.49 to 17.11 dB in Stage 0. Inspect how foreground and background opacities evolve with 100 training cameras and uniform pixel sampling. [Stage 0 validation](VALIDATION.md)
+Stage 1 measured 6.12 updates/s on one T4. The 1,500 additional updates should take about 4 minutes 5 seconds plus data checks, image caching, checkpoint saves and export. Watch the foreground and background opacity on the fixed training rays and compare the step-2,000 preview with the saved step-500 preview. The step-500 fine field had 0.855 mean foreground opacity, 0.034 background opacity and 14.51 dB foreground PSNR. Send the output ZIP even if training stops early, or the traceback if setup fails before export. [Validation record](VALIDATION.md)
 
 ## The first dense checkpoint, after Stage 0 review
 
@@ -48,7 +48,7 @@ finally:
 
 This starts a new 100-view main run with a 50,000-step schedule. Stage 0 was a one-view diagnostic. At the 500-update stop the main run has its own model, Adam state, RNG state and checkpoint. Send `health.json`, `initial-health.json`, `training.jsonl`, `run.json`, and the `train-000500.png` strip. Download the complete snapshot ZIP from the Output pane before releasing the session. Inspect both fields' foreground signal, center-ray bounds and the fine RGB against the target. The Stage 0 `steps_per_s` gives an initial estimate of `500 / steps_per_s` seconds for these updates. Replace it with the measured 500-step main rate.
 
-Once that checkpoint passes review, the same session can run `fit(50000, resume=True)` and `snapshot("trained")`. Estimate remaining training hours as `(50000 - checkpoint_step) / measured_steps_per_s / 3600`. Choose any earlier absolute `end` when the available session time is shorter. Allow time to save the resulting snapshot and download it. A live file in `/kaggle/working` still needs a saved copy outside the active session.
+The step-500 checkpoint passed review. Use the Stage 2 notebook above to exercise the fresh-session handoff. For later segments, estimate remaining training hours as `(50000 - checkpoint_step) / measured_steps_per_s / 3600`. Choose an earlier absolute `end` when the available session time is shorter. Allow time to save the resulting snapshot and download it. A live file in `/kaggle/working` still needs a saved copy outside the active session.
 
 ## Resume or evaluate in a fresh session
 
