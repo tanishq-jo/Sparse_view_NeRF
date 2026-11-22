@@ -1,6 +1,8 @@
 # Sparse-view NeRF recovery
 
-Start with **Stage 0**. It uses one Lego **training** camera, the main model architecture, 512 rays per update, and 256 updates on one GPU. It checks whether both the coarse and fine fields receive gradients and whether the fine field learns a foreground signal. Held-out images are reserved for scoring. The old Kaggle archive provides a working dense control and two failed sparse controls. [Checkpoint investigation](FORENSICS.md)
+**Current operator stage:** the full-width one-camera diagnostic passed on Kaggle. Run the [500-update dense Lego notebook](kaggle_stage1_dense500.ipynb) with the same private input and send its checkpoint ZIP for review. The approved stage uses 100 training views. [Measured result](VALIDATION.md) · [Operator guide](OPERATIONS.md)
+
+Stage 0 uses one Lego training camera, the main model architecture, 512 rays per update, and 256 updates on one GPU. It checks whether both the coarse and fine fields receive gradients and whether the fine field learns a foreground signal. Held-out images are reserved for scoring. The old Kaggle archive provides a working dense control and two failed sparse controls. [Checkpoint investigation](FORENSICS.md)
 
 ## Stage 0 on Kaggle
 

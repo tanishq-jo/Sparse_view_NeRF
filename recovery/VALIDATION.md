@@ -30,11 +30,27 @@ The balanced trial retained nonzero fine-head gradient norms of 0.02346 for dens
 
 Three separate two-step width-16 CPU fits at 40 × 40 exercised checkpoint loading, the final evaluator and report commands. Each scored the same 25 real test views with PSNR, SSIM and pretrained AlexNet LPIPS. Both sparse arms additionally scored their eight training views. Every arm exported three sets of target, RGB, 16-bit depth and opacity PNGs and a matched three-frame H.264 smoke-test video. All three stored identical evaluation, trajectory and LPIPS-weight fingerprints. The video stage replaced a corrupted frame byte-for-byte while preserving an intact cached frame. The paired report correctly withheld both recovery percentages. These miniature fits test the pipeline only.
 
-The 127,351,536-byte Stage 0 input ZIP passed CRC and membership checks for all 325 entries. Its SHA-256 is `40cefc59fe1b53ef2c65cfae4027fc8b433a6ed36a06c0d61621b90e82bb53b8`. The notebook was checked against both zipped and expanded input layouts, including the actual freeze cell in a temporary mount and creation of a readable review ZIP. CUDA execution, T4 throughput and peak memory remain unmeasured on the recovery backend.
+The 127,351,536-byte Stage 0 input ZIP passed CRC and membership checks for all 325 entries. Its SHA-256 is `40cefc59fe1b53ef2c65cfae4027fc8b433a6ed36a06c0d61621b90e82bb53b8`. The notebook was checked against both zipped and expanded input layouts, including the actual freeze cell in a temporary mount and creation of a readable review ZIP.
 
-## What requires a T4 and a real scene
+## Kaggle Stage 0 result
 
-1. Run the 256-update full-width diagnostic in the supplied notebook. Check its own foreground result, preview, memory use and steps/s before running dense Lego.
-2. Review the first 500 updates of the 100-view dense Lego run, including a checkpoint handoff to a fresh Kaggle session. Then measure final held-out performance on the 25-view protocol. The proposal's dense Lego sanity window is 30.54–34.54 dB around the original full-resolution 32.54 dB reference. The different evaluation protocol limits that comparison.
-3. Complete matched held-out metrics, RGB/depth evidence and videos for the nine main fits. Record the eight-view training PSNR fit check, budget and actual throughput. Compute scene-specific recovery only for supported gaps. The archived dense score and the two failed sparse scores describe the previous backend.
-4. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)
+The operator's full-width diagnostic passed on one Tesla T4 with PyTorch 2.11.0+cu130. The review ZIP passed CRC checks. The step-256 checkpoint matched the run metadata and contained the model, Adam and CUDA RNG states. The source fingerprint matched the published recovery code and the local input kit. The frozen Lego data fingerprint matched the local validation. A CPU replay of the uploaded weights on the same local training pixels reproduced both foreground PSNRs within 0.00002 dB and the foreground/background opacity means within 0.0000001.
+
+| Fixed training probe | Coarse field | Fine field |
+| --- | ---: | ---: |
+| Initial foreground PSNR | 7.33 dB | 7.49 dB |
+| Final foreground PSNR | 16.66 dB | 17.11 dB |
+| Final foreground opacity | 0.974 | 0.930 |
+| Final background opacity | 0.999 | 0.452 |
+| Final density-head gradient norm | 0.1140 | 0.1308 |
+| Final color-head gradient norm | 0.0946 | 0.0701 |
+
+On 16 fixed foreground pixels of one training view, the white control scored 2.22 dB. Fine foreground MSE fell from 0.17824 to 0.01944. The preview contains a recognizable, blurred Lego silhouette. Residual density on background rays, especially in the coarse field, merits inspection once more cameras constrain geometry.
+
+The trainer logged 42.94 seconds for 256 updates, or 5.9623 updates/s. Its timer starts after initialization and data caching. This rate projects about 84 seconds for the first 500 dense updates, plus startup, image caching, preview and export. Actual dense throughput and peak GPU memory have yet to be measured. The Stage 0 review ZIP SHA-256 is `92f26aeddffd8c26092cb8eceb2bfa8562d45d1bced8af3c57712dff58fdc63e`.
+
+## Remaining experimental stages
+
+1. Review the first 500 updates of the 100-view dense Lego run and verify a checkpoint handoff to a fresh Kaggle session. Then measure final held-out performance on the 25-view protocol. The proposal's dense Lego sanity window is 30.54–34.54 dB around the original full-resolution 32.54 dB reference. The different evaluation protocol limits that comparison.
+2. Complete matched held-out metrics, RGB/depth evidence and videos for the nine main fits. Record the eight-view training PSNR fit check, budget and actual throughput. Compute scene-specific recovery only for supported gaps. The archived dense score and the two failed sparse scores describe the previous backend.
+3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)

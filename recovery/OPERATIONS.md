@@ -1,8 +1,8 @@
 # Kaggle training and checkpoint handoff
 
-**The current assignment is Stage 0 only.** Import [kaggle_stage0.ipynb](kaggle_stage0.ipynb), attach the private Stage 0 input, select T4 ×2 and run its three code cells. Send `stage0-review.zip` even if the diagnostic exits early. The notebook fits a single Lego training camera for 256 updates on GPU 0. It records both fields' density, opacity, foreground RGB and gradients, a white-image control, and a target/prediction/opacity strip. The pass condition requires foreground PSNR more than 3 dB above white, lower foreground MSE than initialization, and mean foreground opacity above 0.02. Both fields must keep finite, nonzero density and color gradients during monitoring.
+**The operator's Stage 0 passed. The current assignment is the first 500 dense Lego updates.** Import the [Stage 1 notebook](kaggle_stage1_dense500.ipynb) into Kaggle and attach the same private Stage 0 input. It starts a fresh dense vanilla model from seed 42, trains on 100 cameras, saves a recoverable checkpoint, and stops for review. The handoff archive is `lego-dense-vanilla-s42-first-stop.zip`.
 
-The previous PyTorch implementation took 5.78–6.23 steps/s over its first 100 updates on a T4. That implies roughly 41–45 seconds of updates for 256 steps on that implementation, plus setup, preview and checkpoint time. The recovery version has different integration and density code. Use the rate recorded by this notebook for the next estimate. [Archived evidence](FORENSICS.md)
+Stage 0 measured 5.96 updates/s on one T4. At that rate, 500 updates take approximately 84 seconds, plus setup, data caching, preview and export. Fine foreground PSNR rose from 7.49 to 17.11 dB in Stage 0. Inspect how foreground and background opacities evolve with 100 training cameras and uniform pixel sampling. [Stage 0 validation](VALIDATION.md)
 
 ## The first dense checkpoint, after Stage 0 review
 
