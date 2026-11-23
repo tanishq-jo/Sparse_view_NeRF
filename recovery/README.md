@@ -1,6 +1,6 @@
 # Sparse-view NeRF recovery
 
-The 100-view dense Lego checkpoint scored 29.108 dB, 0.9337 SSIM and 0.04630 AlexNet LPIPS across the frozen 25-view test split. The proposal's C4 lower bound is 30.54 dB. Stage 5 compares the saved 20,000- and 50,000-step dense weights on eight full training images to investigate the shortfall. [Stage 5 notebook](kaggle_stage5_dense_fit.ipynb) · [Operator guide](OPERATIONS.md) · [Validation record](VALIDATION.md)
+The 100-view dense Lego checkpoint scored 29.108 dB, 0.9337 SSIM and 0.04630 AlexNet LPIPS across the frozen 25-view test split. The proposal's C4 lower bound is 30.54 dB. Stage 5 found a 2.486 dB mean improvement on eight full training images between steps 20,000 and 50,000. Stage 6 tests another 10,000 updates on a separate copy and scores the same training images. [Stage 6 notebook](kaggle_stage6_dense_continue.ipynb) · [Operator guide](OPERATIONS.md) · [Validation record](VALIDATION.md)
 
 Stage 0 uses one Lego training camera, the main model architecture, 512 rays per update, and 256 updates on one GPU. It checks whether both the coarse and fine fields receive gradients and whether the fine field learns a foreground signal. Held-out images are reserved for scoring. The old Kaggle archive provides a working dense control and two failed sparse controls. [Checkpoint investigation](FORENSICS.md)
 

@@ -1,5 +1,13 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 6. Continue dense Lego from 50,000 to 60,000 updates
+
+1. Import [kaggle_stage6_dense_continue.ipynb](kaggle_stage6_dense_continue.ipynb) in a fresh Kaggle session. Attach the original Stage 0 kit and `lego-dense-vanilla-s42-step50000.zip`. Those two inputs contain the data, renderer, parent weights, Adam state and both random number generator states.
+2. Select **GPU T4 ×2**, then **Run All**. The new run starts at 50,000 on one T4. It holds the learning rate at the parent's final 0.00005 and retains the same ray sampler, architecture and training split. The trainer prints progress against the 75,000-update candidate budget. This particular notebook stops at **60,000**. At 5.285 updates/s, allow **31 min 32 s for training** plus about **3 min 4 s** for the eight training images and time for setup and downloads.
+3. Save the checkpoint ZIP at 55,000 while the session is live. At 60,000 there is a second checkpoint link followed by eight training-image comparisons against Stage 5. Expect finite losses and gradients and a visible Lego foreground in the training preview. Send **`lego-dense-vanilla-s42-stage6-review.zip`**, including if the measured improvement is small or negative. If interrupted, save the newest `lego-dense-vanilla-s42-extension-*.zip` and attach it with the original two inputs in a fresh session. If a cell fails, send its traceback and latest exported checkpoint.
+
+The 75,000 endpoint fixes the candidate budget before any new held-out evaluation. Record the extension as a protocol amendment made after the original C4 miss. Its first 50,000 updates use the original exponential decay and frequency schedule. Its final 25,000 use the constant terminal learning rate. At the measured dense rate, this would cost about 3.94 active GPU-hours per training run, or 35.5 across nine arms before evaluation and videos. The current 60,000 checkpoint is for a training-only decision about spending the final segment. A scientific comparison using this candidate requires all three arms on each scene to follow the same two-phase budget, including the original first 50,000 updates. The 50,000-step results remain a separate protocol.
+
 ## Stage 5. Diagnose the dense Lego training fit
 
 1. In a fresh Kaggle notebook import [kaggle_stage5_dense_fit.ipynb](kaggle_stage5_dense_fit.ipynb). Attach the original private Stage 0 data/code kit, `lego-dense-vanilla-s42-stage3-20000.zip` and `lego-dense-vanilla-s42-step50000.zip`. Either ZIPs or their expanded Kaggle datasets work.

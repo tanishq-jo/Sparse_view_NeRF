@@ -125,10 +125,30 @@ An independent check used all 100 raw training poses and reconstructed 800 cente
 
 Using the actual step-50,000 weights, a separate CPU check sampled 512 distinct pixels uniformly from each of the 100 training views at 400 × 400 (51,200 rays, NumPy PCG64 seed 20261123). The mean of the 100 per-camera sampled PSNRs was **30.02283 dB**, with a **9.40639 dB** white control and **25.11448 dB** on sampled foreground. Mean foreground opacity was 0.994865. The sampling index SHA-256 was `5f2ee24966fc255e5cc3214b55855f66d6a006996f74c1ed50daac422d2c1201`. This estimates the final dense model's training fit. C3 applies to a model trained on eight views and requires scoring its complete training images.
 
-Locally, the Stage 5 notebook resolved both real checkpoint ZIPs, verified the original data and training identities and selected the expected eight training filenames at 400 × 400. Expanded review folders resolved to the same two steps. A 20 × 20 CPU fixture exercised all 16 render calls with the actual weights, all paired summaries, the 22-member ZIP and reuse of a completed result on a second invocation. The fixture validates the code path. The full-image 400 × 400 paired comparison is the pending T4 stage.
+Locally, the Stage 5 notebook resolved both real checkpoint ZIPs, verified the original data and training identities and selected the expected eight training filenames at 400 × 400. Expanded review folders resolved to the same two steps. A 20 × 20 CPU fixture exercised all 16 render calls with the actual weights, all paired summaries, the 22-member ZIP and reuse of a completed result on a second invocation.
+
+## Dense Lego paired training fit on Kaggle
+
+The returned Stage 5 archive SHA-256 is `080bb06e3e28f1a77942e8af84ed85c06dd574a83753fc18e4ad371a6b9a2350`. Its 22 members passed CRC. The step identities match the reviewed dense checkpoints. All 21 PNG hashes matched their records, and the three saved RGB targets matched the locally composited source images pixel for pixel. All eight paired deltas and means reproduced from the per-camera rows.
+
+| Eight full training images at 400 × 400 | Step 20,000 | Step 50,000 |
+| --- | ---: | ---: |
+| Mean RGB PSNR | 27.6288 dB | 30.1145 dB |
+| Mean foreground PSNR | 22.7684 dB | 25.1187 dB |
+| Mean foreground opacity | 0.99257 | 0.99444 |
+| Mean clear-background opacity | 0.000732 | 0.000648 |
+| Mean fraction of RGB squared error in the silhouette band | 21.72% | 19.01% |
+
+All eight images improved, by 2.293 to 2.716 dB each. The silhouette band occupied 2.49% of the pixels on average. Most RGB error remained elsewhere. The paired previews show sharper baseplate and track details, with fine studs still blurred. At both checkpoints all eight cameras reported zero qualifying opaque-foreground expected depths in the outer 5% of the [2, 6] interval. This check concerns rendered expected depth and has no ground-truth depth supervision. The 16 renders took 364.57 seconds on one Tesla T4, including 183.96 seconds for the final eight.
+
+The evidence supports testing a longer training budget. It establishes neither the cause of the held-out shortfall nor a C4 pass. Stage 6 starts a separate child of the 50,000 checkpoint and measures the change on these same eight training views.
+
+## Stage 6 local checks
+
+The notebook restored the original Stage 0 kit and the real step-50,000 checkpoint. After forking, the child had a distinct fingerprint. Every model and Adam tensor, the step and both RNG states matched the parent exactly. ZIP and expanded-folder restores into fresh working directories passed. A CPU fixture using eight rays performed one real optimizer update on the restored weights at 0.00005 and advanced all 48 Adam counters to 50,001. A 20 × 20 fixture exercised the eight paired renders, JSON export, archive integrity and embedded download. The original parent checkpoint retained its recorded SHA-256. The actual 512-ray CUDA continuation and 400 × 400 step-60,000 training scores require the Kaggle run.
 
 ## Remaining experimental stages
 
-1. Compare the 20,000- and 50,000-step checkpoints on identical training images. Review the paired fit and opaque-foreground depth before deciding on the dense baseline and the shared training budget. [Stage 5 notebook](kaggle_stage5_dense_fit.ipynb)
+1. Run the dense extension to the 60,000 training-only review stop. Assess the matched training fit and checkpoint health before the rest of the candidate budget. Held-out scoring stays separate. [Stage 6 notebook](kaggle_stage6_dense_continue.ipynb)
 2. Complete matched held-out metrics, RGB/depth evidence and videos for the nine main fits. Record the eight-view training PSNR fit check, budget and actual throughput. Compute scene-specific recovery only for supported gaps. The archived dense score and the two failed sparse scores describe the previous backend.
 3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)
