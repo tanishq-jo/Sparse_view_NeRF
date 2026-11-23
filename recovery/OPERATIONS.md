@@ -1,5 +1,12 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 8. Start the two sparse Lego arms on T4 ×2
+
+1. Import [kaggle_stage8_lego_sparse_pair.ipynb](kaggle_stage8_lego_sparse_pair.ipynb) and attach the original private Stage 0 Lego kit. Select **GPU T4 ×2** and run all cells. The two independent processes each initialize a fresh model at seed 42. Each worker sees one GPU and maintains its own checkpoint and random number generator states.
+2. Both arms train on cameras 26, 86, 2, 55, 75, 93, 16 and 73 with the same batch size, split, image scale, backgrounds and two-phase schedule as the 75,000-update comparison. The regularised arm also uses frequency annealing and the near-camera density penalty. This notebook stops after 2,000 prefix updates. The trainer's remaining-time display refers to the full 50,000-update first phase.
+3. A pass at step 500 saves a portable pair snapshot and starts the second segment. At each review the fine field must improve on its initial foreground MSE, beat the white control by more than 3 dB and show foreground opacity above 0.02. Both fields must retain density and color gradients. Inspect the target, RGB and opacity strips. These early checks diagnose a white render. The proposal's C3 check uses full training views after fitting.
+4. The final 15,000 dense updates averaged 5.92 updates/s. At that single-GPU rate, 2,000 updates would take about **5 min 38 s** on each GPU. The two jobs overlap. Setup, checkpoints and previews add time, and simultaneous sparse throughput remains to be measured. Send **`lego-sparse-pair-s42-stage8-review.zip`** even if a check fails. Also send any traceback. If interrupted, attach the latest Stage 8 ZIP along with the Stage 0 kit and rerun in a fresh notebook. The export records each arm's saved update and state independently.
+
 ## Stage 7. Finish and evaluate dense Lego in one Kaggle session
 
 1. Import [kaggle_stage7_dense_finish_eval.ipynb](kaggle_stage7_dense_finish_eval.ipynb). Attach the original Stage 0 dataset, `lego-dense-vanilla-s42-stage6-review.zip` and the Stage 4 offline LPIPS kit. Select **GPU T4 ×2** and **Run All**. Only the first GPU is used for this dependent sequence.
@@ -8,7 +15,7 @@
 
 ### Priorities for the submission week
 
-Prepare the personal photographs during the dense run so registration can proceed independently. Review the 75,000 held-out result once. If C4 passes, freeze this schedule for the other main arms and run independent jobs on separate T4s, with early checks for the former white-render failure. If C4 misses, record both dense results and decide how to report a qualified comparison before spending hours on more fits. Reserve the last two days for missing outputs, matched videos, analysis and writing. Budget depends on remaining Kaggle quota and registration success. [Capture and registration guide](CAPTURE.md)
+The decision after Stage 7 was to freeze the 75,000-update schedule and report the C4 miss. Run independent sparse jobs on separate T4s after checking for the former white-render failure. Move personal-scene capture and registration forward during synthetic runs. Reserve the last two days for missing outputs, matched videos, analysis and writing. Budget depends on remaining Kaggle quota and registration success. [Capture and registration guide](CAPTURE.md)
 
 ## Stage 6. Continue dense Lego from 50,000 to 60,000 updates
 

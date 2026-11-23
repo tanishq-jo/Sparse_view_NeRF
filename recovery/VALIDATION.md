@@ -160,10 +160,30 @@ Recomputed the means and all paired differences against the saved Stage 5 result
 
 The prepared Chair kit passed its ZIP member and CRC checks. All 300 image hashes match the audited scene and the renderer, trainer and scoring modules match the frozen Lego kit. Its portable data hash is `9c0224042d8d8060a2684ad70e6edfdf74f7b5acbd159aaa90142581c4e561e4`.
 
-Stage 7 local checks restored the real 60,000 checkpoint byte for byte and loaded the pinned offline AlexNet model on CPU. Fixtures with simulated step counters exercised all three milestone exports, resuming a completed fit in a fresh directory, reuse of an expanded scored snapshot, and the final ZIP's payload hashes and embedded download. The real remaining 15,000 optimizer updates and the new 25-view scores await the operator's T4 run.
+Stage 7 local checks restored the real 60,000 checkpoint byte for byte and loaded the pinned offline AlexNet model on CPU. Fixtures with simulated step counters exercised all three milestone exports, resuming a completed fit in a fresh directory, reuse of an expanded scored snapshot, and the final ZIP's payload hashes and embedded download.
+
+## Dense Lego at 75,000 updates and decision after C4
+
+| Held-out mean, 25 published test cameras at 400 × 400 | 50,000 steps | 75,000 steps |
+| --- | ---: | ---: |
+| PSNR | 29.108364 dB | 29.645220 dB |
+| 7 × 7 SSIM | 0.933727 | 0.940038 |
+| AlexNet LPIPS v0.1 | 0.046302 | 0.040947 |
+| Foreground PSNR | 24.318390 dB | 24.822375 dB |
+| White-control PSNR | 9.492596 dB | 9.492596 dB |
+
+The continuation improved PSNR, SSIM and LPIPS on every paired test camera. Individual PSNR gains ranged from 0.281 to 0.737 dB. The final view scores ranged from 27.576 to 31.333 dB. The geometry and silhouettes of the loader are visible from all three example angles. Several baseplate studs and track details remain softer than their targets. [Paired per-view measurements](../results/recovery/lego/dense-budget-comparison.csv) · [Targets, RGB, opacity and predicted depth](../results/recovery/lego/dense-heldout.png)
+
+**C4 failed.** The dense mean was 0.894780 dB below the window's 30.54 dB lower bound. On 24 November 2026 the operator chose to report this miss and use 75,000 for matched within-backend comparisons. The approved budget is the original 50,000-step exponential schedule followed by 25,000 at 0.00005. Every arm starts from its own seed-42 initialization. The reference is the measured 29.645220 dB Lego result. Sparse held-out scores and gap recovery are pending.
+
+The Stage 7 ZIP SHA-256 is `4f6c16c5cf6dbb4b9875a179eae0b986863b7d522fefd160f999cef248c31e97`. All 24 payload hashes and ZIP CRCs passed. The checkpoint SHA-256 is `471a21d7057f2890d2f899061f2f0e6e2c341464d4625ae0f6a241cf3a3b2ccb`. The saved model fingerprint agrees with the scorer; all 48 Adam counters equal 75,000, weights and moments were finite and both RNG states were present. Recomputed each mean from the 25 frame records and compared the evaluation settings, ordered targets and LPIPS weights with Stage 4. The three exported targets agree pixel for pixel with the original composited Lego images. Scoring took 523.72 seconds on one Tesla T4. The final 15,000 updates took 2,534.59 seconds in three segments.
+
+## Stage 8 local checks
+
+The notebook verified the Stage 0 kit's data identity, the exact eight training cameras, and the hashes of both the original prefix config and the approved 75,000-step config. Two independent CPU subprocesses ran the frozen training CLI with smaller fields and ray batches. Each performed a real optimizer update, restored its checkpoint and performed another. The test checked separate device assignments and paths for vanilla and regularised, distinct run IDs, both previews and the failure-review export. Fixtures with simulated 500- and 2,000-step counters and health records tested the pass path, both ZIP and expanded input, payload hashes, embedded download, and reuse of completed checkpoints in a fresh session. The full-size two-T4 sparse outcomes and simultaneous throughput remain to be measured.
 
 ## Remaining experimental stages
 
-1. Finish the preselected 75,000-step dense candidate and score the frozen 25 held-out views. Training and scoring have separate entry points in the same notebook. Review C4 before the matched sparse runs. [Stage 7 notebook](kaggle_stage7_dense_finish_eval.ipynb)
+1. Start the matched eight-view vanilla and regularised Lego fits, inspect the step-2,000 health evidence, then continue the approved pair if healthy. [Stage 8 notebook](kaggle_stage8_lego_sparse_pair.ipynb)
 2. Complete matched held-out metrics, RGB/depth evidence and videos for the nine main fits. Record the eight-view training PSNR fit check, budget and actual throughput. Compute scene-specific recovery only for supported gaps. The archived dense score and the two failed sparse scores describe the previous backend.
 3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)
