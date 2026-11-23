@@ -1,6 +1,6 @@
 # Sparse-view NeRF recovery
 
-The 100-view dense Lego run passed its step-2,000 review. Run the [dense Lego training notebook](kaggle_stage3_dense_finish.ipynb) with the original Stage 0 kit and the step-2,000 snapshot to finish the remaining 48,000 updates. Held-out scoring follows checkpoint review. [Measured result](VALIDATION.md) · [Operator guide](OPERATIONS.md)
+The 100-view dense Lego checkpoint completed step 50,000 and reproduced its final training probe on CPU. The next stage scores the frozen 25 test views and exports representative RGB, depth and opacity images. Import the Stage 4 notebook with the original Stage 0 input, the step-50,000 ZIP and the offline LPIPS kit. [Stage 4 notebook](kaggle_stage4_dense_eval.ipynb) · [Operator guide](OPERATIONS.md) · [Checkpoint review](VALIDATION.md)
 
 Stage 0 uses one Lego training camera, the main model architecture, 512 rays per update, and 256 updates on one GPU. It checks whether both the coarse and fine fields receive gradients and whether the fine field learns a foreground signal. Held-out images are reserved for scoring. The old Kaggle archive provides a working dense control and two failed sparse controls. [Checkpoint investigation](FORENSICS.md)
 

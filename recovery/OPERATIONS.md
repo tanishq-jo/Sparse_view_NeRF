@@ -1,8 +1,16 @@
 # Kaggle training and checkpoint handoff
 
-**Current stage — finish dense Lego training at update 50,000.** Import the [Stage 3 notebook](kaggle_stage3_dense_finish.ipynb) into Kaggle. Attach the original private Stage 0 kit and `lego-dense-vanilla-s42-step2000.zip`. Select T4 ×2. Run the cells in order and verify the starting checkpoint is at step 2,000 on the first launch. Download `lego-dense-vanilla-s42-step50000.zip` from Output and send it for review. The following stage scores the completed checkpoint on all 25 held-out views.
+## Stage 4. Score dense Lego on the held-out cameras
 
-The resumed training loop measured 6.45 updates/s on one T4. At this rate, 48,000 more updates take about 2 hours 4 minutes, plus setup, checkpoint and export time. Allow roughly 2¼ hours. The third cell defaults to `STOP_AT = 50_000` and publishes a downloadable ZIP at steps 10,000, 20,000, 30,000 and 40,000 before the final export. Expect the first link about 21 minutes into training. Download milestone ZIPs while the session is live. If you have a shorter session, choose an absolute `STOP_AT` and save its ZIP. Attach the latest Stage 3 snapshot alongside the original two inputs to continue in a fresh session. If training stops early, send the latest saved snapshot and any traceback. [Step-2,000 measurements](VALIDATION.md)
+1. Import the [Stage 4 evaluation notebook](kaggle_stage4_dense_eval.ipynb) into a fresh Kaggle notebook. Attach the same private Stage 0 dataset and add `lego-dense-vanilla-s42-step50000.zip` and `stage4-lpips.zip` as private inputs. Keep the original checkpoint ZIP on your computer.
+2. Select **GPU T4 ×2** and run the cells in order. The evaluator uses one T4, the restored step-50,000 weights, and the pretrained AlexNet LPIPS metric. Expect 25 test cameras at 400 × 400. The old T4 dense evaluation took 73 minutes for 200 images, which scales to **about 9 minutes for 25**, plus setup and export. The Stage 4 notebook measures the recovery renderer's own time. [Historical timing](FORENSICS.md)
+3. Download **`/kaggle/working/lego-dense-vanilla-s42-eval.zip`** and send it for review. Expect per-view scores, mean PSNR, SSIM, AlexNet LPIPS and three examples with target, predicted RGB, depth and opacity. Review the predicted Lego against the targets and the PSNR against a white image. The proposal's 30.54–34.54 dB dense range uses a full-resolution reference. A result outside that range should be recorded and reviewed before allocating time to sparse fits. If a cell fails, send the traceback and the last view printed.
+
+The 244 MB private LPIPS kit supplies the pinned wheel and pretrained AlexNet backbone. To rebuild it, download the `lpips==0.1.4` wheel with `python -m pip download --no-deps --only-binary=:all: lpips==0.1.4`. Run the following command from the repository root with the paths to the downloaded wheel and model. The builder checks both hashes. [Official AlexNet weights](https://download.pytorch.org/models/alexnet-owt-7be5be79.pth)
+
+```sh
+python -m recovery.metric_kit --wheel lpips-0.1.4-py3-none-any.whl --weights alexnet-owt-7be5be79.pth --output recovery-output/stage4-lpips.zip
+```
 
 ## The first dense checkpoint, after Stage 0 review
 
@@ -49,6 +57,8 @@ finally:
 This starts a new 100-view main run with a 50,000-step schedule. Stage 0 was a one-view diagnostic. At the 500-update stop the main run has its own model, Adam state, RNG state and checkpoint. Send `health.json`, `initial-health.json`, `training.jsonl`, `run.json`, and the `train-000500.png` strip. Download the complete snapshot ZIP from the Output pane before releasing the session. Inspect both fields' foreground signal, center-ray bounds and the fine RGB against the target. The Stage 0 `steps_per_s` gives an initial estimate of `500 / steps_per_s` seconds for these updates. Replace it with the measured 500-step main rate.
 
 The [Stage 2 notebook](kaggle_stage2_dense_resume.ipynb) restored the reviewed step-500 checkpoint and continued the run to step 2,000. For later segments, estimate remaining training hours as `(50000 - checkpoint_step) / measured_steps_per_s / 3600`. Choose an earlier absolute `end` when the available session time is shorter. Allow time to save the resulting snapshot and download it. A live file in `/kaggle/working` still needs a saved copy outside the active session.
+
+The [Stage 3 notebook](kaggle_stage3_dense_finish.ipynb) completed dense Lego training from step 2,000. If a Stage 3 download link expires, the [checkpoint export script](kaggle_salvage.py) can package surviving files from the original session or a mounted copy of its outputs. The verified step-50,000 ZIP is ready for Stage 4.
 
 ## Resume or evaluate in a fresh session
 

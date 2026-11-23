@@ -83,10 +83,27 @@ Both fields retained density and color gradients. The preview shows the yellow b
 
 The 1,500 updates took 232.60 seconds, **6.4489 updates/s** on one T4. The cell recorded 246.76 seconds through training and preview. At that rate the remaining 48,000 updates take about **2 hours 4 minutes**. The step-2,000 checkpoint SHA-256 is `4babbd7b23849a9d98c578753bb273dc6b943b9e2382dd9955ee271ae23b3a8e`.
 
-The Stage 3 notebook restored these checkpoint bytes into a fresh local working directory and verified all 300 Lego source images. Its snapshot logic was exercised with simulated progress through the four intermediate milestones, a custom stop, an interruption and final export. The 48,000 remaining optimizer updates and held-out evaluation are pending on Kaggle.
+The Stage 3 notebook restored these checkpoint bytes into a fresh local working directory and verified all 300 Lego source images. Its snapshot logic was exercised with simulated progress through the four intermediate milestones, a custom stop, an interruption and final export.
+
+## Dense Lego at 50,000 updates
+
+The recovered Stage 3 ZIP passed CRC verification and identifies run `08ff8d2fceda43759554aa6470054853`. The final log contains the complete saved history through step 20,000. The run metadata, training manifest and earlier previews match that snapshot byte for byte. The ZIP SHA-256 is `a24c4b5820242093f1fa9d54ab953762bc1e878c46c19234b63e9e750bda4b52`. The checkpoint SHA-256 is `a77230d4e17b3769445cf05e26b2bda7f094bf078418ff7d6366d906e19da8be`. All 48 Adam counters reached 50,000. The model weights and optimizer moments are finite. The last training segment logged 5.285 updates/s on one T4.
+
+| Fixed training rays | Step 20,000 | Step 50,000 |
+| --- | ---: | ---: |
+| Fine foreground PSNR | 22.67 dB | 25.25 dB |
+| White control on the same foreground | 4.41 dB | 4.41 dB |
+| Fine foreground opacity | 0.99879 | 0.99977 |
+| Fine background opacity | 0.00046 | 0.00079 |
+
+A CPU replay of the final checkpoint using the local Lego images reproduced the stored training diagnostics for both fields. The fine preview resolves the yellow body, dark chassis and silhouette. The coarse field still has high background opacity (0.7334). The fine field supplies the outputs for held-out scoring. The recovered archive contains training evidence only.
+
+The local 400 × 400 loader gives **9.492596 dB** mean per-view PSNR for a white prediction across the 25 frozen test cameras. The Stage 4 LPIPS ZIP passed its member, SHA-256 and CRC checks. A fresh offline install on CPU produced a pretrained AlexNet v0.1 fingerprint of `913e6288d265ca661f26fe0426b840bc69bafcf9fcda0fb2c99586891562ea9e`. LPIPS was zero on identical inputs and 0.577986 on the changed test input.
+
+The Stage 4 notebook restored the actual final checkpoint with the original Stage 0 kit, verified all 300 image files and checked the 100/8/25 split in a local CPU session. Both intact ZIPs and expanded Kaggle-style inputs passed, including a mount containing an older step-20,000 review. A scoring fixture exercised progress timing, same-session reuse and export. The downloaded bytes matched the 15-member review ZIP, including its 12 PNGs. These local checks took 71 seconds. Full-resolution model scores and the recovery renderer's T4 evaluation rate are pending.
 
 ## Remaining experimental stages
 
-1. Resume the reviewed step-2,000 checkpoint and finish the 50,000-step dense Lego fit. Then score the 25 held-out views in a separate stage. The proposal's dense Lego sanity window is 30.54–34.54 dB around the original full-resolution 32.54 dB reference. The different evaluation protocol limits that comparison.
+1. Score the verified final checkpoint on the 25 held-out Lego views and review the images and metrics. The proposal's dense Lego sanity window is 30.54–34.54 dB around the original full-resolution 32.54 dB reference. The different evaluation protocol limits that comparison. [Stage 4 notebook](kaggle_stage4_dense_eval.ipynb)
 2. Complete matched held-out metrics, RGB/depth evidence and videos for the nine main fits. Record the eight-view training PSNR fit check, budget and actual throughput. Compute scene-specific recovery only for supported gaps. The archived dense score and the two failed sparse scores describe the previous backend.
 3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)

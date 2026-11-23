@@ -1,6 +1,6 @@
 # Sparse-view NeRF with a frequency regularisation prior
 
-**Recovery experiment** — Dense Lego reached step 2,000 after a successful Kaggle checkpoint handoff. The [current operator stage](recovery/README.md) completes the dense training run. The recovery branch includes the checkpoint investigation, both FreeNeRF terms and the published Blender split. The original experiment and pilot instructions follow below.
+**Recovery experiment** — The 100-view dense Lego run finished all 50,000 updates. The recovered checkpoint passed local replay. The next Kaggle stage scores 25 held-out views at 400 × 400. The recovery branch includes both FreeNeRF terms and uses the published Blender split. The original experiment and pilot instructions follow below. [Current operator stage](recovery/OPERATIONS.md) · [Checkpoint review](recovery/VALIDATION.md)
 
 Train the same hierarchical NeRF on 100 views and on eight views. Then train the eight-view version again with **FreeNeRF frequency annealing**. The experiment measures how much of the observed 100-to-eight-view gap this one intervention recovers on Lego, Chair, and an object you photograph. Each scene gets three checkpoints, held-out PSNR and LPIPS scores, and two matched-camera movies.
 
@@ -14,7 +14,7 @@ The renderer and optimiser are implemented in PyTorch. Nerfstudio supplies the c
 
 ## What is already in this workspace
 
-Lego and Chair are downloaded under `data/blender`, with frozen manifests in `manifests/`. A **one-seed CPU pilot** ran all three protocols on each scene at 80 × 80, 1,000 steps and 96 rays per update. Each of the six models was evaluated on all 200 official test cameras. The full 400-pixel, 50,000-step experiment and the self-captured scene remain to be run. The pilot's small dense advantage on Lego makes its recovery percentage particularly sensitive to the denominator.
+Lego and Chair are downloaded under `data/blender`, with frozen manifests in `manifests/`. A **one-seed CPU pilot** ran all three protocols on each scene at 80 × 80, 1,000 steps and 96 rays per update. Each of the six models was evaluated on all 200 official test cameras. The pilot's small dense advantage on Lego makes its recovery percentage particularly sensitive to the denominator.
 
 | Scene | 100-view vanilla PSNR / LPIPS | 8-view vanilla PSNR / LPIPS | 8-view annealed PSNR / LPIPS | Pilot movies |
 | --- | --- | --- | --- | --- |
