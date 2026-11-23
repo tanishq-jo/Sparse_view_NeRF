@@ -147,8 +147,23 @@ The evidence supports testing a longer training budget. It establishes neither t
 
 The notebook restored the original Stage 0 kit and the real step-50,000 checkpoint. After forking, the child had a distinct fingerprint. Every model and Adam tensor, the step and both RNG states matched the parent exactly. ZIP and expanded-folder restores into fresh working directories passed. A CPU fixture using eight rays performed one real optimizer update on the restored weights at 0.00005 and advanced all 48 Adam counters to 50,001. A 20 × 20 fixture exercised the eight paired renders, JSON export, archive integrity and embedded download. The original parent checkpoint retained its recorded SHA-256. The actual 512-ray CUDA continuation and 400 × 400 step-60,000 training scores require the Kaggle run.
 
+## Dense Lego at 60,000 updates
+
+The returned Stage 6 archive SHA-256 is `23367e0ddaf677bf98b19d79384af53214fab23b2881ec3facb72fc7fa9b8671`. All eight payload hashes, archive CRC, run fingerprint and the original 50,000-step lineage verified. The 60,000 checkpoint SHA-256 is `8d60767ce8eded78af78421ee0a0daecf789a71763d11eb0c84c8a071cfd1ba1`. All 48 Adam counters reached 60,000 with finite weights and moments, both RNG states present, and learning rate 0.00005.
+
+| Eight full training images | 50,000 | 60,000 | Paired change |
+| --- | ---: | ---: | ---: |
+| Mean RGB PSNR | 30.1145 dB | 30.3700 dB | +0.2556 dB |
+| Mean foreground PSNR | 25.1187 dB | 25.4112 dB | +0.2925 dB |
+
+Recomputed the means and all paired differences against the saved Stage 5 results. All eight RGB improvements were positive, ranging from 0.1845 to 0.3903 dB. The fine field retained nonzero density and color gradients. Its fixed training-ray foreground PSNR moved from 25.25 to 24.98 dB versus 4.41 dB for white, with 0.9998 mean foreground opacity. The 10,000 optimizer updates took 1,611.49 s in two segments (6.205 updates/s). Rendering the eight training views took 156.12 s on a T4. These measurements justify finishing the preselected budget and leave the 75,000 held-out outcome open.
+
+The prepared Chair kit passed its ZIP member and CRC checks. All 300 image hashes match the audited scene and the renderer, trainer and scoring modules match the frozen Lego kit. Its portable data hash is `9c0224042d8d8060a2684ad70e6edfdf74f7b5acbd159aaa90142581c4e561e4`.
+
+Stage 7 local checks restored the real 60,000 checkpoint byte for byte and loaded the pinned offline AlexNet model on CPU. Fixtures with simulated step counters exercised all three milestone exports, resuming a completed fit in a fresh directory, reuse of an expanded scored snapshot, and the final ZIP's payload hashes and embedded download. The real remaining 15,000 optimizer updates and the new 25-view scores await the operator's T4 run.
+
 ## Remaining experimental stages
 
-1. Run the dense extension to the 60,000 training-only review stop. Assess the matched training fit and checkpoint health before the rest of the candidate budget. Held-out scoring stays separate. [Stage 6 notebook](kaggle_stage6_dense_continue.ipynb)
+1. Finish the preselected 75,000-step dense candidate and score the frozen 25 held-out views. Training and scoring have separate entry points in the same notebook. Review C4 before the matched sparse runs. [Stage 7 notebook](kaggle_stage7_dense_finish_eval.ipynb)
 2. Complete matched held-out metrics, RGB/depth evidence and videos for the nine main fits. Record the eight-view training PSNR fit check, budget and actual throughput. Compute scene-specific recovery only for supported gaps. The archived dense score and the two failed sparse scores describe the previous backend.
 3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)
