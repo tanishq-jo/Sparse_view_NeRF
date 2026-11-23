@@ -1,5 +1,11 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 5. Diagnose the dense Lego training fit
+
+1. In a fresh Kaggle notebook import [kaggle_stage5_dense_fit.ipynb](kaggle_stage5_dense_fit.ipynb). Attach the original private Stage 0 data/code kit, `lego-dense-vanilla-s42-stage3-20000.zip` and `lego-dense-vanilla-s42-step50000.zip`. Either ZIPs or their expanded Kaggle datasets work.
+2. Select **GPU T4 ×2** and run all cells. Expect both checkpoint identities to verify. Each checkpoint renders eight 400 × 400 training images in the published eight-camera order. Stage 4 took 500.15 seconds for 25 images on one T4, implying **5 minutes 20 seconds** for these 16 renders, plus setup and export. Each progress line names a training frame and prints its PSNR and time.
+3. Send **`/kaggle/working/lego-dense-vanilla-s42-train-fit.zip`**. Use the embedded download if the Output link fails. The ZIP holds paired per-camera PSNR changes, foreground/background opacity, opaque-foreground depth summaries and three sets of target and checkpoint images. For each camera it also reports what fraction of image pixels touch the target silhouette and what fraction of total squared RGB error those pixels account for. Review these alongside full-image and object PSNR and any depth values concentrated near a bound. This stage measures training fit and makes zero optimizer updates. Sparse runs await the dense-baseline decision.
+
 ## Stage 4. Score dense Lego on the held-out cameras
 
 1. Import the [Stage 4 evaluation notebook](kaggle_stage4_dense_eval.ipynb) into a fresh Kaggle notebook. Attach the same private Stage 0 dataset and add `lego-dense-vanilla-s42-step50000.zip` and `stage4-lpips.zip` as private inputs. Keep the original checkpoint ZIP on your computer.
@@ -58,7 +64,7 @@ This starts a new 100-view main run with a 50,000-step schedule. Stage 0 was a o
 
 The [Stage 2 notebook](kaggle_stage2_dense_resume.ipynb) restored the reviewed step-500 checkpoint and continued the run to step 2,000. For later segments, estimate remaining training hours as `(50000 - checkpoint_step) / measured_steps_per_s / 3600`. Choose an earlier absolute `end` when the available session time is shorter. Allow time to save the resulting snapshot and download it. A live file in `/kaggle/working` still needs a saved copy outside the active session.
 
-The [Stage 3 notebook](kaggle_stage3_dense_finish.ipynb) completed dense Lego training from step 2,000. If a Stage 3 download link expires, the [checkpoint export script](kaggle_salvage.py) can package surviving files from the original session or a mounted copy of its outputs. The verified step-50,000 ZIP is ready for Stage 4.
+The [Stage 3 notebook](kaggle_stage3_dense_finish.ipynb) completed dense Lego training from step 2,000. If a Stage 3 download link expires, the [checkpoint export script](kaggle_salvage.py) can package surviving files from the original session or a mounted copy of its outputs. Stage 4 scored the verified final ZIP.
 
 ## Resume or evaluate in a fresh session
 
@@ -131,7 +137,7 @@ Start each new arm in its own empty run directory by changing `scene` and `arm` 
 
 The offline Stage 0 input supplies Lego. For Chair, attach the unchanged local `data/blender/chair` and the frozen `scratch/recovery-validation/chair.json` as private inputs. For the personal scene, attach the accepted processed capture and frozen personal manifest. In the setup cell use the mounted scene root for `source` and rebind with `call("recovery.data", "--verify", previous_manifest, "--source", source, "--output", manifest)`. The code confirms every source image hash on the new mount. [Capture and registration](CAPTURE.md)
 
-Use one device per run. A T4 ×2 selection exposes two GPUs, while `cuda:0` selects one for this command. If time requires concurrent jobs after review, give the second approved job `cuda:1` and a separate run directory. The old 5.8 updates/s implies about 2.4 active GPU-hours per trained arm or 21.6 for nine. Nine old-speed videos would add 6.6 hours. Scoring the old 200 views took 73 minutes, so a 25-view test pass at that throughput takes about nine minutes, with additional training-view scoring on sparse arms. These are planning figures. Recalculate against measured main-stage speeds, actual capture resolution and available account quota. Budget for both provisioned GPUs when estimating exposure to the 60–90 GPU-hour cap. Schedule dense Lego first, then each sparse Lego arm, Chair, and the registered capture. Reserve time for scored outputs and checkpoint transfers before adding repeats or stretch runs.
+Use one device per run. A T4 ×2 selection exposes two GPUs, while `cuda:0` selects one. If time requires concurrent jobs after dense review, give the second job `cuda:1` and a separate run directory. At the last dense training rate of 5.285 updates/s, 50,000 updates would take 2.63 active GPU-hours per arm, or 23.65 across nine. Stage 4 measured 8 minutes 20 seconds for 25 held-out Lego images. Eight extra sparse training images at that rate would add roughly 2 minutes 40 seconds. Video timing on the recovery backend remains to be measured. Recalculate for the adopted training budget, capture resolution and available account quota. Include both provisioned GPUs when estimating exposure to the 60–90 GPU-hour cap. Reserve time for scored outputs and checkpoint transfers before adding repeats or stretch runs.
 
 Once all three scored arms for a scene are present, attach or copy their `eval/metrics.json` files and compute the matched report. This can run on CPU.
 

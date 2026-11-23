@@ -100,10 +100,35 @@ A CPU replay of the final checkpoint using the local Lego images reproduced the 
 
 The local 400 × 400 loader gives **9.492596 dB** mean per-view PSNR for a white prediction across the 25 frozen test cameras. The Stage 4 LPIPS ZIP passed its member, SHA-256 and CRC checks. A fresh offline install on CPU produced a pretrained AlexNet v0.1 fingerprint of `913e6288d265ca661f26fe0426b840bc69bafcf9fcda0fb2c99586891562ea9e`. LPIPS was zero on identical inputs and 0.577986 on the changed test input.
 
-The Stage 4 notebook restored the actual final checkpoint with the original Stage 0 kit, verified all 300 image files and checked the 100/8/25 split in a local CPU session. Both intact ZIPs and expanded Kaggle-style inputs passed, including a mount containing an older step-20,000 review. A scoring fixture exercised progress timing, same-session reuse and export. The downloaded bytes matched the 15-member review ZIP, including its 12 PNGs. These local checks took 71 seconds. Full-resolution model scores and the recovery renderer's T4 evaluation rate are pending.
+The Stage 4 notebook restored the actual final checkpoint with the original Stage 0 kit, verified all 300 image files and checked the 100/8/25 split in a local CPU session. Both intact ZIPs and expanded Kaggle-style inputs passed, including a mount containing an older step-20,000 review. A scoring fixture exercised progress timing, same-session reuse and export. The downloaded bytes matched the 15-member review ZIP, including its 12 PNGs. These local checks took 71 seconds.
+
+## Dense Lego held-out result and C4 review
+
+| Measurement | Stage 4 result |
+| --- | ---: |
+| Mean per-view PSNR | 29.108364 dB |
+| Mean 7 × 7 SSIM | 0.933727 |
+| Mean AlexNet LPIPS v0.1 | 0.046302 |
+| White-control PSNR | 9.492596 dB |
+| Mean foreground PSNR / white foreground PSNR | 24.318390 / 4.162358 dB |
+| Mean foreground opacity | 0.993866 |
+| Per-view PSNR range | 26.9923 dB (`r_8`) to 30.7608 dB (`r_16`) |
+| Time on one Tesla T4 | 500.153 s for 25 views, 20.006 s/view |
+
+Evaluation ZIP SHA-256 `5969cea504dad05e20f37b6c82339c9b3a8e57641eb46a0248577f0f1fba008c`. Recomputed the archive CRC, each of 14 payload hashes, metric means and individual white scores. The 25 target images match the local source pipeline and the three exported targets match pixel for pixel. The predicted body, wheels and baseplate are visible in all three examples. The studs and track textures are softer than the targets. The silhouettes have defined edges and the depth maps distinguish the loader from the baseplate. These images provide qualitative depth evidence.
+
+LPIPS 0.1.4 called torchvision's deprecated `pretrained` argument. Torchvision 0.26.0+cu130 used AlexNet ImageNet V1. The complete LPIPS network fingerprint matched the offline CPU reference exactly. The identical-input distance was zero and the changed-input distance was 0.57798612. The archived held-out score is valid.
+
+**C4 missed by 1.431636 dB.** The proposal cites 32.54 dB at 800 × 800 and sets a 30.54–34.54 dB window. Stage 4 used the frozen 400 × 400 protocol. All 25 views beat the white control by at least 16.75 dB. The source of the remaining shortfall is unresolved. Keep this result and protocol when reporting the experiment.
+
+An independent check used all 100 raw training poses and reconstructed 800 center and corner rays from the published horizontal field of view. At 400 × 400 the focal length is 555.555516 pixels. Maximum direction-component error was below 7.81 × 10⁻⁸ and ray origins matched exactly. Scene scale was one and the center-ray depth was about 4.031 between the frozen bounds of 2 and 6. Independent white compositing and downsampling matched all 16 million training RGB pixels exactly. Checking the scene center alone cannot establish that every foreground surface is inside the bounds. Stage 5 measures predicted depth on opaque foreground pixels.
+
+Using the actual step-50,000 weights, a separate CPU check sampled 512 distinct pixels uniformly from each of the 100 training views at 400 × 400 (51,200 rays, NumPy PCG64 seed 20261123). The mean of the 100 per-camera sampled PSNRs was **30.02283 dB**, with a **9.40639 dB** white control and **25.11448 dB** on sampled foreground. Mean foreground opacity was 0.994865. The sampling index SHA-256 was `5f2ee24966fc255e5cc3214b55855f66d6a006996f74c1ed50daac422d2c1201`. This estimates the final dense model's training fit. C3 applies to a model trained on eight views and requires scoring its complete training images.
+
+Locally, the Stage 5 notebook resolved both real checkpoint ZIPs, verified the original data and training identities and selected the expected eight training filenames at 400 × 400. Expanded review folders resolved to the same two steps. A 20 × 20 CPU fixture exercised all 16 render calls with the actual weights, all paired summaries, the 22-member ZIP and reuse of a completed result on a second invocation. The fixture validates the code path. The full-image 400 × 400 paired comparison is the pending T4 stage.
 
 ## Remaining experimental stages
 
-1. Score the verified final checkpoint on the 25 held-out Lego views and review the images and metrics. The proposal's dense Lego sanity window is 30.54–34.54 dB around the original full-resolution 32.54 dB reference. The different evaluation protocol limits that comparison. [Stage 4 notebook](kaggle_stage4_dense_eval.ipynb)
+1. Compare the 20,000- and 50,000-step checkpoints on identical training images. Review the paired fit and opaque-foreground depth before deciding on the dense baseline and the shared training budget. [Stage 5 notebook](kaggle_stage5_dense_fit.ipynb)
 2. Complete matched held-out metrics, RGB/depth evidence and videos for the nine main fits. Record the eight-view training PSNR fit check, budget and actual throughput. Compute scene-specific recovery only for supported gaps. The archived dense score and the two failed sparse scores describe the previous backend.
 3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)
