@@ -182,8 +182,32 @@ The Stage 7 ZIP SHA-256 is `4f6c16c5cf6dbb4b9875a179eae0b986863b7d522fefd160f999
 
 The notebook verified the Stage 0 kit's data identity, the exact eight training cameras, and the hashes of both the original prefix config and the approved 75,000-step config. Two independent CPU subprocesses ran the frozen training CLI with smaller fields and ray batches. Each performed a real optimizer update, restored its checkpoint and performed another. The test checked separate device assignments and paths for vanilla and regularised, distinct run IDs, both previews and the failure-review export. Fixtures with simulated 500- and 2,000-step counters and health records tested the pass path, both ZIP and expanded input, payload hashes, embedded download, and reuse of completed checkpoints in a fresh session. The full-size two-T4 sparse outcomes and simultaneous throughput remain to be measured.
 
+## Sparse Lego at 2,000 updates on two T4s
+
+Both eight-view runs passed at 500 and 2,000 updates. The table uses the fine field on 128 fixed foreground training rays across all eight training cameras. Clear-background opacity uses separate rays from the same views. The white foreground control scored 4.16265 dB.
+
+| Step 2,000 | Vanilla | Regularised |
+| --- | ---: | ---: |
+| Foreground PSNR | 16.37306 dB | 14.72782 dB |
+| Foreground opacity | 0.89028 | 0.89110 |
+| Clear-background opacity | 0.01727 | 0.01650 |
+| Mean foreground sample density | 6.91463 | 4.56718 |
+| Density-head gradient norm | 0.011979 | 0.015612 |
+| Colour-head gradient norm | 0.026180 | 0.030371 |
+| Updates/s while both T4s were active, final segment | 5.71365 | 6.14100 |
+
+The previews show the yellow loader against white. The regularised prediction has a smoother silhouette and less detail at this early checkpoint. Rerendering the fixed rays on CPU from each returned model reproduced both fine foreground PSNR values within 0.00002 dB. Coarse and fine density, opacity, mean RGB, MSE and gradient norms also agreed to numerical tolerance. Training fit on eight full images and quality on the test cameras remain open.
+
+The Stage 8 ZIP SHA-256 is `4fc7094fa39a5f43b77f45e730394644633612635b4fb7458d8f5f812a3ddc14`. All 18 members passed CRC verification and all 17 payload hashes matched the receipt. The sparse IDs, seed, data fingerprint and two-phase settings match the approved comparison. All 48 Adam counters per arm equal 2,000, all weights and moments are finite and both RNG states are present. Vanilla checkpoint SHA-256 is `87b8450e7bb81ed8231f7f0432be7192359ba6afc2f2a157982767f3974eb197`. Regularised checkpoint SHA-256 is `f2e17832c90fd27dd4ec24e25b19d48905d7fc660b85e41ecb9452e6a4592342`.
+
+## Stage 9 local checks
+
+The notebook restored both reviewed checkpoints byte for byte and loaded the calibrated offline AlexNet v0.1 metric on CPU. Two independent workers resumed copies of the real models, each performing one four-ray CPU optimizer update from 2,000 to 2,001. All 48 Adam counters per arm advanced. The project suite passed all 28 tests.
+
+Fixtures with simulated milestone counters exercised eight portable checkpoint exports and the 50,000-step transition. Every model tensor, Adam slot, parameter group and RNG state matched each parent after its fork. A fresh working directory restored the final training snapshot and skipped completed updates. A fixture with synthetic score records exercised model and comparison fingerprints, camera order, image sizes, metric means, embedded ZIP downloads and reuse of scored outputs from an expanded snapshot. A separate control-flow check exercised the live 50k and 75k backup links and the interrupted-evaluation export. Full-batch sparse training through 75,000, actual held-out metrics and the eight-camera fit scores still require the two T4s.
+
 ## Remaining experimental stages
 
-1. Start the matched eight-view vanilla and regularised Lego fits, inspect the step-2,000 health evidence, then continue the approved pair if healthy. [Stage 8 notebook](kaggle_stage8_lego_sparse_pair.ipynb)
+1. Finish the two sparse Lego runs and score them against the same test cameras as the 75,000-update dense reference. Recompute all three arm means and the paired intervals from the returned per-view measurements. [Stage 9 notebook](kaggle_stage9_lego_sparse_finish_eval.ipynb)
 2. Complete matched held-out metrics, RGB/depth evidence and videos for the nine main fits. Record the eight-view training PSNR fit check, budget and actual throughput. Compute scene-specific recovery only for supported gaps. The archived dense score and the two failed sparse scores describe the previous backend.
 3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)
