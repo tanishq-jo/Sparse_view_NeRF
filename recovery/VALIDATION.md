@@ -248,8 +248,27 @@ Two CPU workers started from copies of the actual Chair regularised initialisati
 
 Snapshot payload hashes, embedded download, fresh restore from a ZIP and expanded folders, and reuse of completed milestones all passed. The project suite passed all 28 tests. Reproducing the original step-128 failure, checking persistence at 500 and measuring the effect of the penalty on these two full-batch trajectories still require the T4s.
 
+## Stage 12 Chair results on Kaggle
+
+The full two-term replay exactly reproduced the original Stage 11 health record at 128, including both fields and their gradients. Both replays stayed at the white foreground control through update 500. On the same 128 fixed foreground rays, the eight-view vanilla had reached 14.760 dB at that update. All three checkpoints had identical CPU and CUDA random-generator states at 500. [Stage 11 vanilla measurements](../results/recovery/chair/seed-42/stage11-health.json) · [Stage 12 checkpoint evidence](../results/recovery/chair/seed-42/stage12-probe.json)
+
+| Eight-view diagnostic at 500 | Fine foreground PSNR | White control | Fine foreground opacity | Fine foreground sample RGB channels exactly 1 | Fine colour-head gradient norm |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Frequency annealing + near penalty | 6.367 dB | 6.367 dB | 0.000209 | 100% | 0 |
+| Frequency annealing only | 6.367 dB | 6.367 dB | 0.046090 | 79.23% | 9.70 × 10⁻⁷ |
+
+Both replays also failed on the expanded 256-foreground-ray probe. Dropping the near-camera penalty raised opacity on this trajectory, but the composited foreground stayed white to the reported precision. The frequency-only copy retained a small colour gradient and escaped the native dead-field condition. Its foreground learning check still failed. These training probes provide no held-out Chair score or gap estimate.
+
+Local review verified the archive CRCs, all 33 payload hashes, the Stage 11 parent receipt and checkpoint, and the diagnostic worker identity. All four returned checkpoints had the expected fingerprints, 48 finite Adam states at the stated update, and readable training previews. CPU renders of all four checkpoints reproduced the original and expanded foreground measurements within numerical tolerance.
+
+## Stage 13 local checks
+
+The new notebook was exercised on CPU with the returned Chair weights, full-size networks, eight training rays per update and reduced diagnostic ray counts. Both vanilla arms restored their actual 500-update model and Adam states, trained to 501, then resumed from a portable backup in a fresh workspace and trained to 502. Both exploratory runs restored the original regularised initialisation and completed two real updates. They ended with identical CPU RNG states and nonzero near-camera density gradients. Position and direction masks matched their specified weights at the start, three intermediate fractions and the end of the ramp. The previously observed white Chair prediction failed the foreground check. All 28 repository tests passed.
+
+The final portable ZIP passed CRC and payload-hash checks. Its embedded download reproduced the same bytes. A fresh workspace restored an expanded final snapshot and skipped all four completed runs. The full-batch CUDA baseline continuations and the two 500-update encoding tests are pending.
+
 ## Remaining experimental stages
 
-1. Review the regularised Chair replay and its frequency-only control at 128 and 500 updates. Both are training-only diagnostic runs. Resume the healthy vanilla checkpoints from 500 when proceeding with Chair. [Stage 12 notebook](kaggle_stage12_chair_probe.ipynb)
-2. Finish Chair and the accepted personal capture at the matched 75,000-update endpoint. Record training fit, held-out scores, images, matched videos and time for each scene. Apply the same gated gap calculation to each matched comparison.
+1. Review Stage 13 on T4s. The native Chair baselines resume from 500 to 2,000. Two separate diagnostic copies test one visible starting band and unrestricted frequencies with the near penalty fixed at 0.01. Assess learning from training views before any long run. [Stage 13 notebook](kaggle_stage13_chair_continue.ipynb)
+2. Complete the remaining feasible 75,000-update runs. Report the original Chair regularised failure and label any later protocol amendment. Record held-out scores, images, matched videos and time for completed runs. Calculate recovery only for an eligible matched comparison.
 3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)

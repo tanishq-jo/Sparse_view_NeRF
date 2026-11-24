@@ -1,0 +1,265 @@
+{
+  "stage": 12,
+  "scene": "chair",
+  "seed": 42,
+  "scope": "Training cameras only, paired diagnostic forks",
+  "source_zip_sha256": "3bbdbdcc39a667f6e4959e67e7e570ea03e77633b777e8812a1ef7e87ecbefdb",
+  "receipt_sha256": "bcf281b45bfb5e5ca52c56bf134b37e17401b47551345b244398daf81ec70cc9",
+  "experiment": "4747b1fab630089429adc7954ee19f17fcc8cd928e3f60a483a7f1efb762ced9",
+  "data_hash": "9c0224042d8d8060a2684ad70e6edfdf74f7b5acbd159aaa90142581c4e561e4",
+  "backend_sha256": "4b85a7f9d5836739fb562c5fb3ff25fa68b063073bbea539e38ed1130f088eb5",
+  "parent_checkpoint_sha256": "f88c4b4fcec9ffec8b34004eaa14d2e5939c266c28df6e2dca304cec9cfe582c",
+  "source_stage11_receipt_sha256": "80b250038e7335b82e982e4f576538f9128ef449a65650a3435f697a81040db5",
+  "device_names": [
+    "Tesla T4",
+    "Tesla T4"
+  ],
+  "torch": "2.11.0+cu130",
+  "arms": {
+    "full": {
+      "128": {
+        "run_id": "52a7390792cdf2682fd702133deef6ce",
+        "checkpoint_sha256": "440dfaa776c40c09089d5c39588b473bd60405f7ae297820226942ba22093886",
+        "rng_sha256": {
+          "cpu_rng": "dbbfb6e8a0585676aae7a0727b94c9d0d539a5a5aec247f946b23356a443c92e",
+          "cuda_rng": "4ae037fc3969677a185b016bc10816e9f7a6cb22d7e2b9c97329de7319a143c4"
+        },
+        "segment_steps_per_s": 6.8659825482760075,
+        "probes": {
+          "original": {
+            "foreground_rays": 128,
+            "white_psnr": 6.367371330506853,
+            "fine_fg_psnr": 6.367371050130397,
+            "fg_opacity": 0.0019111171131953597,
+            "background_opacity": 0.0005410963203758001,
+            "fine_fg_mean_density": 0.0005852995673194528,
+            "fine_fg_mean_rgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fine_sample_rgb_fraction_exactly_one": 1.0,
+            "fine_sample_logit_range": [
+              19.50181007385254,
+              71.85012817382812
+            ],
+            "fine_colour_head_rgb_grad_l2": 0.0,
+            "fine_colour_head_nonzero": 0,
+            "fine_density_head_rgb_grad_l2": 2.219619338811467e-09,
+            "fine_density_head_near_grad_l2_weighted": 2.5098003896914763e-06,
+            "native_dead_field": true,
+            "passed_foreground_check": false
+          },
+          "expanded": {
+            "foreground_rays": 256,
+            "white_psnr": 6.320283438554171,
+            "fine_fg_psnr": 6.320283438554171,
+            "fg_opacity": 0.0018831419292837381,
+            "background_opacity": 0.0005462045082822442,
+            "fine_fg_mean_density": 0.0005761860520578921,
+            "fine_fg_mean_rgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fine_sample_rgb_fraction_exactly_one": 1.0,
+            "fine_sample_logit_range": [
+              19.50181007385254,
+              72.71866607666016
+            ],
+            "fine_colour_head_rgb_grad_l2": 0.0,
+            "fine_colour_head_nonzero": 0,
+            "fine_density_head_rgb_grad_l2": 9.326695313714196e-10,
+            "fine_density_head_near_grad_l2_weighted": 2.5044411214926167e-06,
+            "native_dead_field": true,
+            "passed_foreground_check": false
+          }
+        }
+      },
+      "500": {
+        "run_id": "52a7390792cdf2682fd702133deef6ce",
+        "checkpoint_sha256": "e41addba80b9d548b3fcda4a32a9d7d08174854bda45e75b8adbc4b3af085734",
+        "rng_sha256": {
+          "cpu_rng": "f55063e715227dd816a473455c671d22ea9212bf6d84e0c08e53669634bb7537",
+          "cuda_rng": "173b960d9f274f38dffbd77dfb20dfd825f89bee5f557f4be701d1aece2e8977"
+        },
+        "segment_steps_per_s": 6.823666824527194,
+        "probes": {
+          "original": {
+            "foreground_rays": 128,
+            "white_psnr": 6.367371330506853,
+            "fine_fg_psnr": 6.367371330506853,
+            "fg_opacity": 0.00020908660371787846,
+            "background_opacity": 3.479597216937691e-05,
+            "fine_fg_mean_density": 6.665870023425668e-05,
+            "fine_fg_mean_rgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fine_sample_rgb_fraction_exactly_one": 1.0,
+            "fine_sample_logit_range": [
+              22.639678955078125,
+              85.59123229980469
+            ],
+            "fine_colour_head_rgb_grad_l2": 0.0,
+            "fine_colour_head_nonzero": 0,
+            "fine_density_head_rgb_grad_l2": 1.8435917133113156e-10,
+            "fine_density_head_near_grad_l2_weighted": 1.0131675520447741e-07,
+            "native_dead_field": true,
+            "passed_foreground_check": false
+          },
+          "expanded": {
+            "foreground_rays": 256,
+            "white_psnr": 6.320283438554171,
+            "fine_fg_psnr": 6.320283438554171,
+            "fg_opacity": 0.00020489748567342758,
+            "background_opacity": 3.529153764247894e-05,
+            "fine_fg_mean_density": 6.5225365688093e-05,
+            "fine_fg_mean_rgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fine_sample_rgb_fraction_exactly_one": 1.0,
+            "fine_sample_logit_range": [
+              22.624053955078125,
+              85.59123229980469
+            ],
+            "fine_colour_head_rgb_grad_l2": 0.0,
+            "fine_colour_head_nonzero": 0,
+            "fine_density_head_rgb_grad_l2": 1.0581479408840989e-10,
+            "fine_density_head_near_grad_l2_weighted": 1.0144903553086046e-07,
+            "native_dead_field": true,
+            "passed_foreground_check": false
+          }
+        }
+      }
+    },
+    "frequency-only": {
+      "128": {
+        "run_id": "574280f77d2a7051dfa19dcc07ea0667",
+        "checkpoint_sha256": "613aa4b152362b9070968cffd86588b886e42c2c50312e88063bdb7f15391395",
+        "rng_sha256": {
+          "cpu_rng": "dbbfb6e8a0585676aae7a0727b94c9d0d539a5a5aec247f946b23356a443c92e",
+          "cuda_rng": "4ae037fc3969677a185b016bc10816e9f7a6cb22d7e2b9c97329de7319a143c4"
+        },
+        "segment_steps_per_s": 6.448052514179313,
+        "probes": {
+          "original": {
+            "foreground_rays": 128,
+            "white_psnr": 6.367371330506853,
+            "fine_fg_psnr": 6.367371610883328,
+            "fg_opacity": 0.04726170748472214,
+            "background_opacity": 0.027262069284915924,
+            "fine_fg_mean_density": 0.013638792559504509,
+            "fine_fg_mean_rgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fine_sample_rgb_fraction_exactly_one": 0.7852240800857544,
+            "fine_sample_logit_range": [
+              12.443596839904785,
+              44.77677917480469
+            ],
+            "fine_colour_head_rgb_grad_l2": 1.0058763952176597e-06,
+            "fine_colour_head_nonzero": 59,
+            "fine_density_head_rgb_grad_l2": 2.8881905348929226e-07,
+            "fine_density_head_near_grad_l2_weighted": 0.0,
+            "native_dead_field": false,
+            "passed_foreground_check": false
+          },
+          "expanded": {
+            "foreground_rays": 256,
+            "white_psnr": 6.320283438554171,
+            "fine_fg_psnr": 6.320283438554171,
+            "fg_opacity": 0.04682232066988945,
+            "background_opacity": 0.027185721322894096,
+            "fine_fg_mean_density": 0.013499438762664795,
+            "fine_fg_mean_rgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fine_sample_rgb_fraction_exactly_one": 0.7871025800704956,
+            "fine_sample_logit_range": [
+              12.412944793701172,
+              45.52912902832031
+            ],
+            "fine_colour_head_rgb_grad_l2": 9.544776840516835e-07,
+            "fine_colour_head_nonzero": 59,
+            "fine_density_head_rgb_grad_l2": 2.7850181114556623e-07,
+            "fine_density_head_near_grad_l2_weighted": 0.0,
+            "native_dead_field": false,
+            "passed_foreground_check": false
+          }
+        }
+      },
+      "500": {
+        "run_id": "574280f77d2a7051dfa19dcc07ea0667",
+        "checkpoint_sha256": "096ea6c97f1ec92ff217b90af5de1c1ebf997209d5c23ebf199b721f70db8637",
+        "rng_sha256": {
+          "cpu_rng": "f55063e715227dd816a473455c671d22ea9212bf6d84e0c08e53669634bb7537",
+          "cuda_rng": "173b960d9f274f38dffbd77dfb20dfd825f89bee5f557f4be701d1aece2e8977"
+        },
+        "segment_steps_per_s": 6.2997393028215365,
+        "probes": {
+          "original": {
+            "foreground_rays": 128,
+            "white_psnr": 6.367371330506853,
+            "fine_fg_psnr": 6.367371610883328,
+            "fg_opacity": 0.04608997702598572,
+            "background_opacity": 0.02580936998128891,
+            "fine_fg_mean_density": 0.01336829923093319,
+            "fine_fg_mean_rgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fine_sample_rgb_fraction_exactly_one": 0.7922634482383728,
+            "fine_sample_logit_range": [
+              12.382867813110352,
+              45.72468566894531
+            ],
+            "fine_colour_head_rgb_grad_l2": 9.6998220920897e-07,
+            "fine_colour_head_nonzero": 59,
+            "fine_density_head_rgb_grad_l2": 2.918851455363099e-07,
+            "fine_density_head_near_grad_l2_weighted": 0.0,
+            "native_dead_field": false,
+            "passed_foreground_check": false
+          },
+          "expanded": {
+            "foreground_rays": 256,
+            "white_psnr": 6.320283438554171,
+            "fine_fg_psnr": 6.320283438554171,
+            "fg_opacity": 0.04561786353588104,
+            "background_opacity": 0.02573838084936142,
+            "fine_fg_mean_density": 0.01321457326412201,
+            "fine_fg_mean_rgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fine_sample_rgb_fraction_exactly_one": 0.794542133808136,
+            "fine_sample_logit_range": [
+              12.348994255065918,
+              45.72468566894531
+            ],
+            "fine_colour_head_rgb_grad_l2": 9.154608471470437e-07,
+            "fine_colour_head_nonzero": 59,
+            "fine_density_head_rgb_grad_l2": 2.74216075661269e-07,
+            "fine_density_head_near_grad_l2_weighted": 0.0,
+            "native_dead_field": false,
+            "passed_foreground_check": false
+          }
+        }
+      }
+    }
+  },
+  "rng_matches_stage11_sparse_vanilla_at_500": {
+    "cpu_rng": true,
+    "cuda_rng": true
+  },
+  "full_128_health_exactly_matches_stage11": true
+}

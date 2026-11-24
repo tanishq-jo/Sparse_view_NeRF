@@ -1,5 +1,13 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 13. Continue Chair vanilla and test the initial frequency mask
+
+1. Import [the Stage 13 notebook](kaggle_stage13_chair_continue.ipynb). Attach the original Chair dataset (`chair-input.zip` or expanded) and **`chair-s42-stage11-review.zip`** (or expanded). Select **GPU T4 ×2** and **Run All**. Setup verifies the two vanilla checkpoints at 500 and the regularised checkpoint at zero.
+2. The two vanilla workers resume on separate T4s. Each writes a checkpoint at 1,000 and continues to 2,000 if the foreground check passes. Download **`chair-s42-stage13-vanilla2000.zip`** when it appears. The 1,000-update backup is also available in Output.
+3. Two eight-view diagnostic copies start from the same regularised initial weights and RNGs. Both use the 0.01 near-camera penalty. **First-band** exposes the lowest sine/cosine pair at initialisation and progressively opens the remaining bands. **Near-only** exposes all bands from initialisation. Each records any dead-field warning and ends at 500 with a checkpoint, preview, gradients and two fixed-ray probes. These are separately identified post-failure experiments. The original Chair and Lego settings retain their own run identities.
+4. The measured vanilla rates of 5.91 and 6.26 updates/s project to 4.2 minutes for 1,500 further updates in parallel. The Stage 12 rates of 6.30–6.82 updates/s project to about 80 seconds for the second pair. Allow **8–15 minutes total** with startup and exports. The printed per-worker training ETA uses the 50k prefix, while the notebook stops at the short milestones.
+5. A foreground pass requires finite live coarse and fine gradients, fine foreground PSNR over 3 dB above its white control, lower fine foreground MSE than its own initialisation and foreground opacity above 0.02. Return **`chair-s42-stage13-review.zip`** for either diagnostic outcome. If a worker errors, send the diagnostics ZIP and traceback. In a fresh session, attach the latest completed Stage 13 ZIP alongside the original two inputs and select Run All.
+
 ## Stage 12. Replay the Chair foreground failure
 
 1. Import [the Stage 12 notebook](kaggle_stage12_chair_probe.ipynb). Attach the **same Chair dataset** used in Stage 11 and the returned **`chair-s42-stage11-review.zip`** as a second private input. Both ZIP and expanded inputs work. Select **GPU T4 ×2** and **Run All**.
