@@ -1,5 +1,12 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 14. Finish and score both Chair baselines
+
+1. Import [the Stage 14 notebook](kaggle_stage14_chair_vanilla_finish.ipynb). Attach the original Chair kit, `chair-s42-stage13-review.zip`, and the Stage 4 offline LPIPS kit. Choose **GPU T4 ×2** and **Run All**. Setup should restore dense vanilla and eight-view vanilla at **2,000** and verify the official 25 test targets.
+2. Dense vanilla measured 5.38 updates/s and sparse vanilla 6.50 updates/s in the last Stage 13 segment. The slower T4 projects to **3 h 46 min** of optimisation for the remaining 73,000 updates. Allow **4–4½ hours total** with checkpoints and scoring, approximately 8–9 allocated GPU-hours. Check the actual rates in the notebook. Each 10k milestone checks gradients and foreground learning before continuing.
+3. Save **`chair-vanilla-pair-s42-stage14-step50000.zip`** and **`chair-vanilla-pair-s42-stage14-step75000.zip`**. On interruption, attach the latest successful Stage 14 snapshot alongside the two kits and run all cells. The progress message reports the actual restored step for each arm.
+4. The separate scoring cell produces PSNR, SSIM, LPIPS-Alex v0.1 and representative RGB, depth and opacity for each arm. It verifies the test pixels and the per-view white control. It also scores all eight training images for sparse vanilla. Send **`chair-vanilla-pair-s42-stage14-review.zip`** after both reports finish, or the latest ZIP and traceback on failure. Video export follows scoring.
+
 ## Stage 13. Continue Chair vanilla and test the initial frequency mask
 
 1. Import [the Stage 13 notebook](kaggle_stage13_chair_continue.ipynb). Attach the original Chair dataset (`chair-input.zip` or expanded) and **`chair-s42-stage11-review.zip`** (or expanded). Select **GPU T4 ×2** and **Run All**. Setup verifies the two vanilla checkpoints at 500 and the regularised checkpoint at zero.

@@ -1,5 +1,26 @@
 # Photograph and register the personal scene
 
+## Local CPU registration
+
+For a single-camera photo folder, the project can run COLMAP locally through PyCOLMAP 4.2.1. It extracts SIFT features, matches every image pair, runs incremental mapping, and exports the shared focal length and radial distortion with OpenGL camera-to-world matrices in Nerfstudio's transforms format. All submitted JPG, JPEG and PNG files count toward the registration denominator. The commands below use a fresh output folder.
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install pycolmap==4.2.1
+.\.venv\Scripts\python.exe -m recovery.register_capture --raw photos/A --output recovery-output/personal/A --threads 4
+```
+
+Inspect `registration.json` for the registered count, component sizes, missing filenames and mean point error. A passing run also writes the binary sparse model, text tracks, `scene/transforms.json`, registered images and a frozen `personal.json`. The exporter converts the camera axes while retaining the COLMAP world frame. [PyCOLMAP API](https://colmap.github.io/pycolmap/pycolmap.html) · [COLMAP reconstruction guide](https://colmap.github.io/tutorial.html)
+
+## Package the accepted capture
+
+The supplied 77-image capture has passed registration and its camera split is frozen. To rebuild a portable private input from an accepted manifest, run the following from the repository root, choosing an unused ZIP filename. The command verifies the original images and reloads the packed manifest against the extracted images.
+
+```powershell
+.\.venv\Scripts\python.exe -m recovery.operator_kit --scene personal --manifest recovery-output/personal/capture-01/registration/personal.json --output recovery-output/personal/capture-01/personal-input-copy.zip
+```
+
+## Taking photos and registering with Nerfstudio
+
 You can collect photographs while the synthetic scenes train. Choose a matte, textured object about 20–40 cm across, on a nonwhite surface with a close backdrop. A little fixed texture on the support helps COLMAP match features. Keep the subject, background and lighting still. Walk the camera around the object. Turning the object on a turntable while the room stays still gives COLMAP incompatible motion. Keep people and private details outside the frame.
 
 1. Capture two candidate subjects, each in its own folder. Aim for 60–80 sharp overlapping JPG or PNG stills per subject. Three arcs at low, middle and high elevations with roughly 20–25 photos per arc work for an object you can walk around. Keep visible overlap with adjacent arcs. A textured detail should be easy to recognize in several neighboring photos.

@@ -267,8 +267,31 @@ The new notebook was exercised on CPU with the returned Chair weights, full-size
 
 The final portable ZIP passed CRC and payload-hash checks. Its embedded download reproduced the same bytes. A fresh workspace restored an expanded final snapshot and skipped all four completed runs. The full-batch CUDA baseline continuations and the two 500-update encoding tests are pending.
 
+## Stage 13 Chair results on Kaggle
+
+Stage 13 on the two T4s produced the following fixed training-ray measurements. The dense and sparse probes use different training cameras. Held-out Chair quality requires Stage 14.
+
+| Chair arm | Update | Fine foreground PSNR | White control | Foreground opacity |
+| --- | ---: | ---: | ---: | ---: |
+| Dense vanilla | 2,000 | 17.514 dB | 6.682 dB | 0.979108 |
+| Eight-view vanilla | 2,000 | 19.099 dB | 6.367 dB | 0.951624 |
+| Eight-view first-band diagnostic | 500 | 6.367 dB | 6.367 dB | 0.000069 |
+| Eight-view near-only diagnostic | 500 | 6.367 dB | 6.367 dB | 0.000116 |
+
+Both 500-update copies saturated every fine RGB sample channel on the original foreground rays and had zero fine colour-head gradient. Local verification covered the ZIP payload, all four checkpoint identities and Adam states, parent logs for the baselines, matching random states for the diagnostics, and CPU rerenders of the probes. The regularised Chair result remains a documented training failure. [Reviewed measurements](../results/recovery/chair/seed-42/stage13-health.json)
+
+## Stage 14 local validation
+
+Stage 14 restored the two real 2,000-update checkpoints and their saved Adam states. Each completed a further reduced-batch update on CPU. The offline LPIPS model hash and its identical/different image checks passed. A local fixture advanced milestone counters to exercise both schedule phases, archive export, and a fresh restore at 75,000. Both phase changes preserved the parent model tensors, optimizer state and CPU/CUDA RNG bytes. Score-file fixtures exercised export separately from GPU rendering. Full Chair training and held-out measurements remain pending on the T4s.
+
+## Registration of the personal scene
+
+The personal capture supplied 77 distinct 960 × 1280 images. PyCOLMAP 4.2.1 registered 76 in a single model (98.70%) with 6,808 points and 0.73637 px mean per-point reprojection error. All 77 submitted frames counted toward the threshold. Seed 42 assigned 64 dense training views, eight of those for sparse training, and 12 disjoint held-out views. The frozen bounds are 2.58712 to 7.78882 in normalised camera-axis units and the operating resolution is 240 × 320. The exported camera model agreed with native COLMAP projections to within 2 × 10⁻¹² px on 2,029 sampled point observations. The median measured residual to the detected features in that sample was 0.65445 px. All three image splits loaded with finite rays, and the private training ZIP passed CRC, extraction and image-hash checks. [Registration and packaging](CAPTURE.md)
+
+All three personal-scene arm configurations completed a 16-ray Adam update on CPU with the frozen camera model. The coarse and fine colour and density heads had nonzero finite gradients in each arm. This checks input and optimiser compatibility. Sustained learning and held-out quality on the personal scene still require GPU measurements.
+
 ## Remaining experimental stages
 
-1. Review Stage 13 on T4s. The native Chair baselines resume from 500 to 2,000. Two separate diagnostic copies test one visible starting band and unrestricted frequencies with the near penalty fixed at 0.01. Assess learning from training views before any long run. [Stage 13 notebook](kaggle_stage13_chair_continue.ipynb)
+1. Finish and score the two native Chair baselines. Dense and eight-view vanilla passed at 2,000 updates. First-band and near-only both reproduced the white foreground at 500. [Stage 13 measurements](../results/recovery/chair/seed-42/stage13-health.json) · [Stage 14 notebook](kaggle_stage14_chair_vanilla_finish.ipynb)
 2. Complete the remaining feasible 75,000-update runs. Report the original Chair regularised failure and label any later protocol amendment. Record held-out scores, images, matched videos and time for completed runs. Calculate recovery only for an eligible matched comparison.
-3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)
+3. Run the first full-batch T4 health check on the accepted personal capture before its longer experiments.

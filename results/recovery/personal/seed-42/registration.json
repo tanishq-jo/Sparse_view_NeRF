@@ -1,0 +1,44 @@
+{
+  "raw": 77,
+  "registered": 76,
+  "model_sizes": {
+    "0": 76
+  },
+  "points": 6808,
+  "mean_point_error_px": 0.7363696484427735,
+  "split_sizes": {
+    "dense": 64,
+    "sparse": 8,
+    "test": 12
+  },
+  "data_hash": "d39c6ff67262904660cf715ea3ba6cdbd17ae3a0cf07a1b83a917cbb50dbe8ae",
+  "sample_projections": 2029,
+  "max_colmap_projection_disagreement_px": 1.6553053431563326e-12,
+  "sampled_median_pixel_residual": 0.6544505758570887,
+  "near": 2.5871214644903153,
+  "far": 7.788821238818515,
+  "downscale": 4,
+  "training_resolution": [
+    240,
+    320
+  ],
+  "package_sha256": "7a12a48988f11d493beb2844c14391d93b51c99a7217984cc7febca464777753",
+  "pycolmap": "4.2.1",
+  "stage": "registration and loader checks",
+  "scope": "known-pose view synthesis; all submitted images eligible for registration",
+  "raw_resolution": [
+    960,
+    1280
+  ],
+  "split_seed": 42,
+  "registered_fraction": 0.987012987012987,
+  "cpu_check": {
+    "rays_per_arm": 16,
+    "optimizer_updates_per_arm": 1,
+    "arms": [
+      "dense-vanilla",
+      "sparse-vanilla",
+      "sparse-regularized"
+    ]
+  }
+}

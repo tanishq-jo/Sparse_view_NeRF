@@ -1,0 +1,133 @@
+{
+  "scene": "chair",
+  "seed": 42,
+  "stage": 13,
+  "scope": "Fixed training rays",
+  "zip_sha256": "7a107ccafe1e5f9a011d423411b8d27c9cd209dd992a19a97605010517dc4358",
+  "receipt_sha256": "232f81c0ecfbfad4152a92fb81cd853a08aa3774424216a4cb384b115af81ca4",
+  "experiment": "8ed3a6523099195b2affb2d5f657d3d43d91c2dc84a332cc5f9e27074509fd1f",
+  "data_hash": "9c0224042d8d8060a2684ad70e6edfdf74f7b5acbd159aaa90142581c4e561e4",
+  "schedule_hash": "cb22d3ef607e2d0172bca9f873b55ffbc945714344b4ddd78e72be7347ddb390",
+  "arms": {
+    "dense-vanilla": {
+      "run_id": "d2d17f3cf61c4d5d97d2a515c6740916",
+      "checkpoint_sha256": "c15456b86b4b8531bc9e88cf21011a1565e1eb20c18deb1318f9b2956e15652b",
+      "update": 2000,
+      "passed": true,
+      "segment_updates_per_second": 5.378205045504986,
+      "white_psnr": 6.6820385923409065,
+      "fine": {
+        "region_psnr": 17.51415075783627,
+        "region_mse": 0.01772494614124298,
+        "avg_density": 16.59840202331543,
+        "region_opacity": 0.9791083335876465,
+        "outside_opacity": 0.008436853997409344,
+        "region_rgb": [
+          0.6449019908905029,
+          0.6709041595458984,
+          0.4802491068840027
+        ],
+        "density_grad": 0.00101682438980788,
+        "color_grad": 0.006770140957087278
+      }
+    },
+    "sparse-vanilla": {
+      "run_id": "f96679c7906f4e84947ed4bd957d2c46",
+      "checkpoint_sha256": "f03d8fee6d792deadab33e65948f944567f5da4e98eea28bce838c1f044f1f04",
+      "update": 2000,
+      "passed": true,
+      "segment_updates_per_second": 6.496698639000154,
+      "white_psnr": 6.367371330506853,
+      "fine": {
+        "region_psnr": 19.098517967113292,
+        "region_mse": 0.012306886725127697,
+        "avg_density": 4.3535332679748535,
+        "region_opacity": 0.9516238570213318,
+        "outside_opacity": 0.08192187547683716,
+        "region_rgb": [
+          0.6242203116416931,
+          0.6531362533569336,
+          0.4651890993118286
+        ],
+        "density_grad": 0.006447429768741131,
+        "color_grad": 0.019121600314974785
+      }
+    },
+    "first-band": {
+      "run_id": "537f8174578308830778c75f84c47429",
+      "checkpoint_sha256": "6c3b9aa2278fa2fd9dc6212a3eca3d151bcbb22bdcc44aeae026eecc24d6e19a",
+      "update": 500,
+      "passed": false,
+      "segment_updates_per_second": 5.323914843796545,
+      "white_psnr": 6.367371330506853,
+      "fine": {
+        "region_psnr": 6.367371330506853,
+        "region_mse": 0.2308143824338913,
+        "avg_density": 1.977607280423399e-05,
+        "region_opacity": 6.947315705474466e-05,
+        "outside_opacity": 1.816647818486672e-05,
+        "region_rgb": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "density_grad": 4.673362391516278e-11,
+        "color_grad": 0.0
+      },
+      "original": {
+        "foreground_rays": 128,
+        "fg_psnr": 6.367371330506853,
+        "white_psnr": 6.367371330506853,
+        "opacity": 6.947315705474466e-05,
+        "saturated_sample_channels": 1.0,
+        "fine_color_gradient": 0.0
+      },
+      "expanded": {
+        "foreground_rays": 256,
+        "fg_psnr": 6.320283438554171,
+        "white_psnr": 6.320283438554171,
+        "opacity": 6.933372060302645e-05,
+        "saturated_sample_channels": 1.0,
+        "fine_color_gradient": 0.0
+      }
+    },
+    "near-only": {
+      "run_id": "d3f8e78922939fc2eacff062a1daef39",
+      "checkpoint_sha256": "da76bb068c2b0bd7b3ba940311e91f789030f6e227f78af34c04b00b72d3d8fb",
+      "update": 500,
+      "passed": false,
+      "segment_updates_per_second": 6.5124489333402416,
+      "white_psnr": 6.367371330506853,
+      "fine": {
+        "region_psnr": 6.367371050130397,
+        "region_mse": 0.2308143973350525,
+        "avg_density": 3.530878893798217e-05,
+        "region_opacity": 0.00011591974180191755,
+        "outside_opacity": 5.204082845011726e-05,
+        "region_rgb": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "density_grad": 7.416272457261286e-12,
+        "color_grad": 0.0
+      },
+      "original": {
+        "foreground_rays": 128,
+        "fg_psnr": 6.367371050130397,
+        "white_psnr": 6.367371330506853,
+        "opacity": 0.00011591974180191755,
+        "saturated_sample_channels": 1.0,
+        "fine_color_gradient": 0.0
+      },
+      "expanded": {
+        "foreground_rays": 256,
+        "fg_psnr": 6.320283438554171,
+        "white_psnr": 6.320283438554171,
+        "opacity": 0.00011280299804639071,
+        "saturated_sample_channels": 1.0,
+        "fine_color_gradient": 0.0
+      }
+    }
+  }
+}
