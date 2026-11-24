@@ -1,5 +1,14 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 12. Replay the Chair foreground failure
+
+1. Import [the Stage 12 notebook](kaggle_stage12_chair_probe.ipynb). Attach the **same Chair dataset** used in Stage 11 and the returned **`chair-s42-stage11-review.zip`** as a second private input. Both ZIP and expanded inputs work. Select **GPU T4 ×2** and **Run All**.
+2. Setup checks the exact Stage 11 receipt, member hashes, starting checkpoint and eight cameras. Expect the full diagnostic copy on one GPU and the frequency-only copy on the other. Both restore the regularised step-zero state. The second copy changes only the near-camera coefficient, from 0.01 to zero. The two vanilla checkpoints at 500 remain available for their next resume.
+3. Save **`chair-s42-stage12-step128.zip`** when its link appears. Each diagnostic copy retains its actual step-128 weights, target/prediction/opacity preview and fixed-ray measurements. Both record the original dead-field warning and continue under observation to a hard limit of 500. The frozen loss, optimiser, sampling, frequency ramp and finite-value checks apply throughout. At each stop the notebook checks that both CPU and CUDA RNG streams still agree across copies.
+4. A successful diagnostic prints whether the full copy reproduced the white signature at 128 and whether each copy passed the foreground check at 500. Either outcome is a result. At the short Stage 11 regularised rate of 5.35 steps/s, 500 updates project to about 94 seconds per GPU in parallel. Allow **4–8 minutes wall time** including imports, probes and archives. Send **`chair-s42-stage12-review.zip`**, or the **diagnostics ZIP and traceback** if a worker errors. For a fresh session, reattach the latest completed Stage 12 snapshot with the original two inputs. Review this evidence before changing the main protocol or launching a long run.
+
+The original 128-ray foreground check at 500 requires fine PSNR above the initial 13.506 dB (and more than 3 dB above white), opacity above 0.02 and live coarse and fine heads. A full replay that recovers after reproducing the stop would show that the failure was transient in that replay. Recovery only with the near penalty disabled would implicate that term in this controlled run. If both copies stay white, use the saturation, opacity and separate RGB/near gradient measurements to narrow the next test. A replay that differs at 128 must be reported as such.
+
 ## Stage 11. Check the three Chair runs
 
 1. Import [the Stage 11 notebook](kaggle_stage11_chair_health.ipynb). Upload the prepared private `recovery-output/chair-input.zip` as a Kaggle dataset and attach it, or reuse it if already uploaded. Either the ZIP or its expanded contents work. Select **GPU T4 ×2** and **Run All**.

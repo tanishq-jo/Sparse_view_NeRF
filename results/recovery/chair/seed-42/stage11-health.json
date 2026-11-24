@@ -1,0 +1,266 @@
+{
+  "stage": 11,
+  "scene": "chair",
+  "seed": 42,
+  "scope": "fixed training rays",
+  "source_zip_sha256": "2a4ecd1a99c193c38c7f782ee4c0d38c5201ac97ffac4ed48d55c03498b7d4ed",
+  "data_hash": "9c0224042d8d8060a2684ad70e6edfdf74f7b5acbd159aaa90142581c4e561e4",
+  "training_schedule_hash": "cb22d3ef607e2d0172bca9f873b55ffbc945714344b4ddd78e72be7347ddb390",
+  "arms": {
+    "dense-vanilla": {
+      "run_id": "d2d17f3cf61c4d5d97d2a515c6740916",
+      "checkpoint_sha256": "f8d848bfe4ef128a891a2213293fa93d289457e6723e940675b65442d21454a2",
+      "saved_step": 500,
+      "passed": true,
+      "initial": {
+        "region": "alpha>=245",
+        "white_region_psnr": 6.6820385923409065,
+        "foreground_rays": 128,
+        "coarse": {
+          "region_psnr": 12.647897065809005,
+          "region_mse": 0.05435134470462799,
+          "avg_density": 0.3411593735218048,
+          "region_opacity": 0.7481706142425537,
+          "outside_opacity": 0.7616766691207886,
+          "region_rgb": [
+            0.6288096904754639,
+            0.6503773927688599,
+            0.6401678919792175
+          ],
+          "density_grad": 0.0060910931788384914,
+          "color_grad": 0.01854999177157879
+        },
+        "fine": {
+          "region_psnr": 12.758012202818678,
+          "region_mse": 0.052990593016147614,
+          "avg_density": 0.34115612506866455,
+          "region_opacity": 0.7481675744056702,
+          "outside_opacity": 0.7616726756095886,
+          "region_rgb": [
+            0.612085223197937,
+            0.6359126567840576,
+            0.6274409890174866
+          ],
+          "density_grad": 0.00416853791102767,
+          "color_grad": 0.01780232973396778
+        },
+        "step": 0
+      },
+      "last_diagnostic": {
+        "region": "alpha>=245",
+        "white_region_psnr": 6.6820385923409065,
+        "foreground_rays": 128,
+        "coarse": {
+          "region_psnr": 13.608795373280522,
+          "region_mse": 0.04356326907873154,
+          "avg_density": 0.6236635446548462,
+          "region_opacity": 0.8423225283622742,
+          "outside_opacity": 0.03942493349313736,
+          "region_rgb": [
+            0.6684752702713013,
+            0.689746081829071,
+            0.5516034364700317
+          ],
+          "density_grad": 0.052595511078834534,
+          "color_grad": 0.034379735589027405
+        },
+        "fine": {
+          "region_psnr": 13.202683607840989,
+          "region_mse": 0.04783344268798828,
+          "avg_density": 2.647988796234131,
+          "region_opacity": 0.8038173317909241,
+          "outside_opacity": 0.0114187216386199,
+          "region_rgb": [
+            0.6916784048080444,
+            0.6800096035003662,
+            0.575106143951416
+          ],
+          "density_grad": 0.05680738016963005,
+          "color_grad": 0.077998086810112
+        },
+        "step": 500
+      },
+      "camera_check": {
+        "center_t_min": 4.031121730804443,
+        "center_t_max": 4.031123161315918,
+        "max_centerline_distance": 0.005131101235747337,
+        "near": 2.0,
+        "far": 6.0
+      }
+    },
+    "sparse-vanilla": {
+      "run_id": "f96679c7906f4e84947ed4bd957d2c46",
+      "checkpoint_sha256": "44b5548421d6de8037c7b12d70eb49d68ddaf193c86ba2204fd2a1ff947663b7",
+      "saved_step": 500,
+      "passed": true,
+      "initial": {
+        "region": "alpha>=245",
+        "white_region_psnr": 6.367371330506853,
+        "foreground_rays": 128,
+        "coarse": {
+          "region_psnr": 13.301241108526831,
+          "region_mse": 0.04676014930009842,
+          "avg_density": 0.34115922451019287,
+          "region_opacity": 0.7480765581130981,
+          "outside_opacity": 0.7618030309677124,
+          "region_rgb": [
+            0.6299822330474854,
+            0.647391676902771,
+            0.6396855115890503
+          ],
+          "density_grad": 0.010693102143704891,
+          "color_grad": 0.021275492385029793
+        },
+        "fine": {
+          "region_psnr": 13.528830855487763,
+          "region_mse": 0.0443728081882,
+          "avg_density": 0.3411562442779541,
+          "region_opacity": 0.7480737566947937,
+          "outside_opacity": 0.7617989182472229,
+          "region_rgb": [
+            0.6126532554626465,
+            0.6347324848175049,
+            0.6261260509490967
+          ],
+          "density_grad": 0.00891942996531725,
+          "color_grad": 0.019327035173773766
+        },
+        "step": 0
+      },
+      "last_diagnostic": {
+        "region": "alpha>=245",
+        "white_region_psnr": 6.367371330506853,
+        "foreground_rays": 128,
+        "coarse": {
+          "region_psnr": 15.45273402514118,
+          "region_mse": 0.028492240235209465,
+          "avg_density": 0.42537254095077515,
+          "region_opacity": 0.7896969318389893,
+          "outside_opacity": 0.07342270016670227,
+          "region_rgb": [
+            0.638715386390686,
+            0.6656328439712524,
+            0.49407094717025757
+          ],
+          "density_grad": 0.027572523802518845,
+          "color_grad": 0.02432234212756157
+        },
+        "fine": {
+          "region_psnr": 14.759830466016355,
+          "region_mse": 0.033420808613300323,
+          "avg_density": 0.6740244626998901,
+          "region_opacity": 0.6145046949386597,
+          "outside_opacity": 0.04056239873170853,
+          "region_rgb": [
+            0.6624041795730591,
+            0.6926004886627197,
+            0.5404635667800903
+          ],
+          "density_grad": 0.09136416018009186,
+          "color_grad": 0.04583470895886421
+        },
+        "step": 500
+      },
+      "camera_check": {
+        "center_t_min": 4.031122207641602,
+        "center_t_max": 4.03112268447876,
+        "max_centerline_distance": 0.005131022538989782,
+        "near": 2.0,
+        "far": 6.0
+      }
+    },
+    "sparse-regularized": {
+      "run_id": "54a4af1279b14f8bbb3a954b2f02870e",
+      "checkpoint_sha256": "f88c4b4fcec9ffec8b34004eaa14d2e5939c266c28df6e2dca304cec9cfe582c",
+      "saved_step": 0,
+      "passed": false,
+      "initial": {
+        "region": "alpha>=245",
+        "white_region_psnr": 6.367371330506853,
+        "foreground_rays": 128,
+        "coarse": {
+          "region_psnr": 13.332264135024745,
+          "region_mse": 0.04642731696367264,
+          "avg_density": 0.3411557972431183,
+          "region_opacity": 0.7480731010437012,
+          "outside_opacity": 0.7617992162704468,
+          "region_rgb": [
+            0.6335002183914185,
+            0.6430878639221191,
+            0.6366753578186035
+          ],
+          "density_grad": 0.009457261301577091,
+          "color_grad": 0.008897685445845127
+        },
+        "fine": {
+          "region_psnr": 13.50576034559432,
+          "region_mse": 0.044609151780605316,
+          "avg_density": 0.3411579728126526,
+          "region_opacity": 0.7480756044387817,
+          "outside_opacity": 0.7618010640144348,
+          "region_rgb": [
+            0.6212012767791748,
+            0.6375893950462341,
+            0.6235113143920898
+          ],
+          "density_grad": 0.008472918532788754,
+          "color_grad": 0.009333406575024128
+        },
+        "step": 0
+      },
+      "last_diagnostic": {
+        "region": "alpha>=245",
+        "white_region_psnr": 6.367371330506853,
+        "foreground_rays": 128,
+        "coarse": {
+          "region_psnr": 6.367371610883328,
+          "region_mse": 0.2308143675327301,
+          "avg_density": 0.02464885637164116,
+          "region_opacity": 0.09558403491973877,
+          "outside_opacity": 0.06520836055278778,
+          "region_rgb": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "density_grad": 4.760334206821426e-07,
+          "color_grad": 1.511911250418052e-06
+        },
+        "fine": {
+          "region_psnr": 6.367371050130397,
+          "region_mse": 0.2308143973350525,
+          "avg_density": 0.0005852995673194528,
+          "region_opacity": 0.0019111171131953597,
+          "outside_opacity": 0.0005410963203758001,
+          "region_rgb": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "density_grad": 2.219619377186177e-09,
+          "color_grad": 0.0
+        },
+        "step": 128
+      },
+      "camera_check": {
+        "center_t_min": 4.031122207641602,
+        "center_t_max": 4.03112268447876,
+        "max_centerline_distance": 0.005131022538989782,
+        "near": 2.0,
+        "far": 6.0
+      }
+    }
+  },
+  "sparse_pixel_sampler_check": {
+    "source": "Replayed frozen CPU pixel sampler from returned regularised step-zero RNG",
+    "steps": 128,
+    "rays_per_step": 512,
+    "foreground": "alpha>=245 after BOX resize to 400x400",
+    "clear_background": "alpha<=10 after BOX resize to 400x400",
+    "foreground_rays_per_batch_min": 73,
+    "foreground_rays_per_batch_max": 125,
+    "foreground_fraction": 0.1945037841796875,
+    "clear_background_fraction": 0.7974700927734375,
+    "step500_cpu_rng_matches_saved_sparse_vanilla": true
+  }
+}

@@ -230,8 +230,26 @@ The notebook verified the prepared Chair kit and the same two-phase schedule use
 
 Reduced-width CPU fixtures each completed an actual optimizer update, checkpoint restore and second update on Chair. Simulated milestone counters and health records exercised the 500- and 2,000-update exports, failure stop, mixed-step resume, embedded download, and fresh restores from ZIPs and expanded folders. A restored failed health check prevented further training. All 28 repository tests passed. Full-batch CUDA learning on Chair and its measured throughput are pending the Stage 11 review.
 
+## Stage 11 Chair results on Kaggle
+
+| Training arm | Last saved update | Diagnostic update | Fine foreground PSNR | White control | Foreground opacity | Fine colour-head gradient norm |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Dense vanilla | 500 | 500 | 13.203 dB | 6.682 dB | 0.803817 | 0.077998 |
+| Eight-view vanilla | 500 | 500 | 14.760 dB | 6.367 dB | 0.614505 | 0.045835 |
+| Eight-view regularised | 0 | 128 | 6.367 dB | 6.367 dB | 0.001911 | 0 |
+
+The regularised foreground RGB mean was [1, 1, 1] on the 128 fixed foreground rays. Fine mean density was 0.0005853 and the fine density-head gradient norm was 2.22 × 10⁻⁹. Coarse mean density was 0.02465, coarse foreground opacity was 0.09558, and its density and colour gradients were nonzero. The fine colour gradient triggered the stop. The step-128 health record was written before the trainer raised, so the portable regularised checkpoint is still at initialisation. The eight-view vanilla probe also scored at the white control to logged precision at 128 and recovered by 500. No arm reached 2,000.
+
+The archive SHA-256 is `2a4ecd1a99c193c38c7f782ee4c0d38c5201ac97ffac4ed48d55c03498b7d4ed`. CRCs, all 21 payload digests, checkpoint fingerprints, Adam states and both RNG states verified. CPU replay reproduced the two step-500 fine foreground PSNRs within 0.00002 dB. The step-zero regularised model reproduced its initial diagnostics. Dense and sparse centre rays passed within 0.00514 scene units of the origin with centre depth about 4.031 inside the 2–6 bounds. Replaying the eight-view CPU pixel sampler yielded 73–125 opaque foreground pixels in every one of the first 128 batches of 512. Opaque pixels accounted for 19.45% overall. The replay's CPU RNG state at 500 matched the saved sparse vanilla state. The measurements establish the symptom; they leave open the contribution of the near-camera penalty and whether the white state would persist. [Saved diagnostic values](../results/recovery/chair/seed-42/stage11-health.json)
+
+## Stage 12 local checks
+
+Two CPU workers started from copies of the actual Chair regularised initialisation. Each ran a real optimiser update with eight rays and the full-size networks, restored its checkpoint and ran another update. Both copies consumed identical CPU random streams. The full two-term copy agreed with a separate run of the unmodified trainer to within 10⁻⁷ per model parameter. The frequency-only copy had a zero weighted near-loss gradient. A separately saturated colour-head fixture produced a white foreground, a zero colour-head gradient and a measurable near-loss density gradient in the new probes.
+
+Snapshot payload hashes, embedded download, fresh restore from a ZIP and expanded folders, and reuse of completed milestones all passed. The project suite passed all 28 tests. Reproducing the original step-128 failure, checking persistence at 500 and measuring the effect of the penalty on these two full-batch trajectories still require the T4s.
+
 ## Remaining experimental stages
 
-1. Review 500- and 2,000-update foreground learning and actual throughput for all three Chair arms. [Stage 11 notebook](kaggle_stage11_chair_health.ipynb)
+1. Review the regularised Chair replay and its frequency-only control at 128 and 500 updates. Both are training-only diagnostic runs. Resume the healthy vanilla checkpoints from 500 when proceeding with Chair. [Stage 12 notebook](kaggle_stage12_chair_probe.ipynb)
 2. Finish Chair and the accepted personal capture at the matched 75,000-update endpoint. Record training fit, held-out scores, images, matched videos and time for each scene. Apply the same gated gap calculation to each matched comparison.
 3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)
