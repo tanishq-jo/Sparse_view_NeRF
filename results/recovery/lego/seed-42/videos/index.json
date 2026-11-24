@@ -1,0 +1,63 @@
+{
+  "archive_sha256": "dd6a10bbf99a736bdafdfcff05a32fd612e1f23e39f832364e81321056fa6abc",
+  "trajectory": {
+    "data_hash": "bdc22418467720a3dbf5555318532caf17c250a05433f8553ae58372f11e89e2",
+    "downscale": 2,
+    "frames": 120,
+    "fps": 24,
+    "path": "blender-orbit-v1"
+  },
+  "trajectory_hash": "a439091ea45f0bf3164b894df78c2071ed01ec746fa1481dd61612b806d7914e",
+  "render_segment": {
+    "start_count": 0,
+    "end_count": 360,
+    "seconds": 4180.378138831
+  },
+  "videos": {
+    "dense-vanilla": {
+      "file": "dense-vanilla.mp4",
+      "sha256": "6512bad3db371f8ec952b3e9868bbec039c16c4d83a92621f5dd4d11ac381777",
+      "run_id": "0aee2c9d8be2e3010c28850a68f3d61a",
+      "checkpoint_sha256": "471a21d7057f2890d2f899061f2f0e6e2c341464d4625ae0f6a241cf3a3b2ccb",
+      "model_sha256": "6c383a6109dd11bf95b23ee2ee0de5d648620047b240b1a6c64fd1ef1dd9b17c",
+      "size": [
+        400,
+        400
+      ],
+      "codec": "H.264",
+      "decoded_frames": 120,
+      "fps": 24.0,
+      "seconds": 5.0
+    },
+    "sparse-vanilla": {
+      "file": "sparse-vanilla.mp4",
+      "sha256": "07b8be60c46f877bd1facd336d515ea5198cad5915e23963cb5808bf8e9e932b",
+      "run_id": "5017814ebc891e916cbec2c346260c01",
+      "checkpoint_sha256": "bc19cd0a9f58babaebf7637e7df28689cc73cb9043fa84929d562536e8454c55",
+      "model_sha256": "3be8359f1b4cba47c0b36dc2d7452b16510a5cdbfc9fe42aed339bf44cecb45c",
+      "size": [
+        400,
+        400
+      ],
+      "codec": "H.264",
+      "decoded_frames": 120,
+      "fps": 24.0,
+      "seconds": 5.0
+    },
+    "sparse-regularized": {
+      "file": "sparse-regularized.mp4",
+      "sha256": "c97bc66b593d2ac82645187c6ae931f92a4a25be2e260fc7a2a494963aa0917f",
+      "run_id": "4f720a6e750b61c8ae778a0469d3612b",
+      "checkpoint_sha256": "bab848fca5ad1adb5ac23e6fbb1824bff5cc9ed3f095032d37cd904c6c7c2bcd",
+      "model_sha256": "af382e422dddec26922eebde4ba28445133e5b7f64a40acc34ff21873352d4a7",
+      "size": [
+        400,
+        400
+      ],
+      "codec": "H.264",
+      "decoded_frames": 120,
+      "fps": 24.0,
+      "seconds": 5.0
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # Sparse-view NeRF recovery
 
-All three Lego arms have held-out scores at 75,000 updates. Dense vanilla reached **29.645 dB**, eight-view vanilla **25.618 dB** and eight-view regularised **25.353 dB**. Both sparse arms cleared the mean 30 dB training-fit check. The 100-view dense reference missed C4 by 0.895 dB. Stage 10 exports the three matched 120-frame orbits from the reviewed weights. [Matched measurements and images](../results/recovery/lego/seed-42/README.md) · [Stage 10 notebook](kaggle_stage10_lego_videos.ipynb) · [Operator guide](OPERATIONS.md)
+The three Lego runs have verified metrics, representative RGB and depth images, and matched 120-frame videos. Dense vanilla reached **29.645 dB**, eight-view vanilla **25.618 dB** and eight-view regularised **25.353 dB**. Both sparse arms cleared the mean 30 dB training-fit check. The 100-view dense reference missed C4 by 0.895 dB. Stage 11 checks the three Chair runs at 500 and 2,000 updates under the same final schedule. [Lego measurements and videos](../results/recovery/lego/seed-42/README.md) · [Stage 11 notebook](kaggle_stage11_chair_health.ipynb) · [Operator guide](OPERATIONS.md)
 
 Stage 0 uses one Lego training camera, the main model architecture, 512 rays per update, and 256 updates on one GPU. It checks whether both the coarse and fine fields receive gradients and whether the fine field learns a foreground signal. Held-out images are reserved for scoring. The old Kaggle archive provides a working dense control and two failed sparse controls. [Checkpoint investigation](FORENSICS.md)
 

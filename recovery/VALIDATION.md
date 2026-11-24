@@ -218,8 +218,20 @@ The approved dense reference scored 29.6452 dB. Eight-view vanilla reached 25.61
 
 Using the three original 75,000-update models on CPU, sampled an 8 × 8 ray grid from orbit frames 0 and 97 for each arm. Each first-frame PNG matched the frozen video exporter's output on the same rays byte for byte. A fresh session restored a six-frame cache. Two concurrent CPU subprocesses exercised the missing-frame assignment. A separate encoding fixture produced three 400 × 400 H.264 clips and FFmpeg decoded all 120 frames of each. The archive's 366 payload hashes, embedded download and expanded-folder restore passed. The published evaluator archive also reproduced the entire 10,000-draw Lego report from its three original metric files. All 28 project tests passed. Full-resolution orbit inference, the three final movies and actual two-T4 video throughput still require Stage 10 on Kaggle.
 
+## Stage 10 matched Lego videos on Kaggle
+
+The returned ZIP has SHA-256 `dd6a10bbf99a736bdafdfcff05a32fd612e1f23e39f832364e81321056fa6abc`. All 367 members passed CRC and all 366 payload hashes matched. The three descriptors match the reviewed 75,000-update run IDs, models and checkpoints. All use the same trajectory fingerprint, `a439091ea45f0bf3164b894df78c2071ed01ec746fa1481dd61612b806d7914e`.
+
+Each H.264 clip decoded to 120 ordered RGB frames at 400 × 400, 24 fps and five seconds. Each decoded frame's closest 32 × 32 thumbnail among its 120 lossless source images had the same frame index. For each model, CPU replay on an 8 × 8 grid at orbit frames 7, 41 and 89 reproduced every sampled 8-bit channel exactly. The two T4s rendered the 360 frames in 4,180.38 s (69 min 40 s). A labelled comparison clip was encoded locally from the original PNGs and decoded to 120 frames. The full frame archive is retained in local recovery storage. [Original movies, comparison and fingerprints](../results/recovery/lego/seed-42/README.md#matched-novel-view-videos)
+
+## Stage 11 local Chair checks
+
+The notebook verified the prepared Chair kit and the same two-phase schedule used on Lego. On all 100 dense and the eight sparse training cameras, the centre rays passed within 0.00514 scene units of the origin, with centre depth about 4.031 inside the frozen 2–6 bounds. Each diagnostic used 128 foreground rays across eight training cameras. The white control was 6.68204 dB for the dense diagnostic and 6.36737 dB for the sparse diagnostic. The full seed-42 model had finite, nonzero density and colour gradients at initialisation for all three arms.
+
+Reduced-width CPU fixtures each completed an actual optimizer update, checkpoint restore and second update on Chair. Simulated milestone counters and health records exercised the 500- and 2,000-update exports, failure stop, mixed-step resume, embedded download, and fresh restores from ZIPs and expanded folders. A restored failed health check prevented further training. All 28 repository tests passed. Full-batch CUDA learning on Chair and its measured throughput are pending the Stage 11 review.
+
 ## Remaining experimental stages
 
-1. Export the three matched Lego videos from the reviewed checkpoints. [Stage 10 notebook](kaggle_stage10_lego_videos.ipynb)
-2. Run dense vanilla, eight-view vanilla and eight-view regularised on Chair and the accepted personal capture. Record training fit, held-out scores, images, matched videos and time for each scene. Apply the same gated gap calculation to each matched comparison.
+1. Review 500- and 2,000-update foreground learning and actual throughput for all three Chair arms. [Stage 11 notebook](kaggle_stage11_chair_health.ipynb)
+2. Finish Chair and the accepted personal capture at the matched 75,000-update endpoint. Record training fit, held-out scores, images, matched videos and time for each scene. Apply the same gated gap calculation to each matched comparison.
 3. Register the personal capture, check the camera frustums and reprojection statistics, then freeze its pixels, poses, split and depth bounds before training. [Capture instructions](CAPTURE.md)

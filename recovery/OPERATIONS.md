@@ -1,5 +1,12 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 11. Check the three Chair runs
+
+1. Import [the Stage 11 notebook](kaggle_stage11_chair_health.ipynb). Upload the prepared private `recovery-output/chair-input.zip` as a Kaggle dataset and attach it, or reuse it if already uploaded. Either the ZIP or its expanded contents work. Select **GPU T4 ×2** and **Run All**.
+2. Expect verification of 300 Chair source images, 100 dense training views, the published eight sparse views and 25 held-out cameras at 400 × 400. All models start from seed 42. Dense vanilla and eight-view vanilla start on separate T4s, then the eight-view regularised arm uses a free T4. Each run keeps its own weights, Adam state and RNG states.
+3. The fixed foreground rays give white-control PSNRs of about 6.68 dB for dense and 6.37 dB for both sparse arms. At step 500, each arm's fine foreground PSNR must exceed its own control by more than 3 dB, foreground MSE must improve from initialisation and foreground opacity must exceed 0.02. Both passes need finite, nonzero density and colour gradients. A failure stops the stage. When all three pass, download `chair-s42-stage11-step500.zip` as a backup and let the notebook continue to step 2,000. Training time at the measured Lego rates of 5.4–6.2 updates/s projects to 11–13 minutes across two waves. Allow **15–20 minutes wall time** with setup and export.
+4. Send **`chair-s42-stage11-review.zip`**, including on a failed health check, along with any traceback. The ZIP includes per-arm checkpoints, initial and latest diagnostics, previews, logs, exact split and schedule. In a fresh session, add the latest Stage 11 ZIP to the Chair kit and rerun. Completed checkpoints are reused. The next long run depends on this review.
+
 ## Stage 10. Export the three matched Lego videos
 
 1. Import [the Stage 10 notebook](kaggle_stage10_lego_videos.ipynb). Attach the original Stage 0 Lego kit, `lego-dense-vanilla-s42-stage7-review.zip` and `lego-sparse-pair-s42-stage9-review.zip`. Select **GPU T4 ×2** and **Run All**. Expanded inputs also work. Expect three verified model identities at 75,000 updates and a shared 120-frame orbit.

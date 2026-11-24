@@ -25,3 +25,9 @@ The dense advantage exceeded 3 dB, and its paired interval excluded zero. The re
 The examples use the first, middle and last test cameras in the frozen evaluation order. On camera 192, the vanilla sparse render has stray structure to the upper left of the loader. The regularised render reduces that artifact and improves this camera's PSNR from 22.494 to 23.571 dB. Camera 96 goes the other way, from 30.226 to 29.147 dB. All depth maps use camera-axis depth on the same 2–6 scale. [RGB and depth comparison](held-out-comparison.png) · [Original scores, targets, RGB, opacity and 16-bit depth PNGs](held-out-examples.zip)
 
 To reproduce the table and intervals on CPU, extract the example archive into `lego-eval` and run `python -m recovery.report --runs lego-eval --output lego-comparison.json` from the repository root. Each arm's `eval/metrics.json` is the original scorer output.
+
+## Matched novel-view videos
+
+Each 400 × 400 clip follows the same 120-position orbit in five seconds at 24 fps. The comparison places the three original PNG sequences side by side, aligned by camera index. Around zero-based frame 41, stray structure is visible to the right of the loader in the eight-view vanilla render and is less apparent in the regularised render. The held-out table gives the quantitative comparison across the test cameras. [Watch side by side](videos/comparison.mp4)
+
+Original H.264 exports and their checkpoint identities are available individually. [100-view vanilla](videos/dense-vanilla.mp4) · [Eight-view vanilla](videos/sparse-vanilla.mp4) · [Eight-view regularised](videos/sparse-regularized.mp4) · [Movie and checkpoint hashes](videos/index.json)
