@@ -1,6 +1,6 @@
 # Sparse-view NeRF recovery
 
-Dense Lego scored **29.645 dB, 0.9400 SSIM and 0.04095 AlexNet LPIPS** at 75,000 updates across the frozen 25-view test split. The C4 lower bound is 30.54 dB. The operator accepted this checkpoint for within-backend comparisons with the C4 failure disclosed. Both eight-view Lego arms passed the 2,000-update health review. Stage 9 resumes them through the matched 75,000-update endpoint and scores 25 test and eight training cameras per arm. [Stage 9 notebook](kaggle_stage9_lego_sparse_finish_eval.ipynb) · [Operator guide](OPERATIONS.md) · [Validation record](VALIDATION.md)
+All three Lego arms have held-out scores at 75,000 updates. Dense vanilla reached **29.645 dB**, eight-view vanilla **25.618 dB** and eight-view regularised **25.353 dB**. Both sparse arms cleared the mean 30 dB training-fit check. The 100-view dense reference missed C4 by 0.895 dB. Stage 10 exports the three matched 120-frame orbits from the reviewed weights. [Matched measurements and images](../results/recovery/lego/seed-42/README.md) · [Stage 10 notebook](kaggle_stage10_lego_videos.ipynb) · [Operator guide](OPERATIONS.md)
 
 Stage 0 uses one Lego training camera, the main model architecture, 512 rays per update, and 256 updates on one GPU. It checks whether both the coarse and fine fields receive gradients and whether the fine field learns a foreground signal. Held-out images are reserved for scoring. The old Kaggle archive provides a working dense control and two failed sparse controls. [Checkpoint investigation](FORENSICS.md)
 

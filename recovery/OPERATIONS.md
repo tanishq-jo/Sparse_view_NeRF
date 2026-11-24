@@ -1,5 +1,12 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 10. Export the three matched Lego videos
+
+1. Import [the Stage 10 notebook](kaggle_stage10_lego_videos.ipynb). Attach the original Stage 0 Lego kit, `lego-dense-vanilla-s42-stage7-review.zip` and `lego-sparse-pair-s42-stage9-review.zip`. Select **GPU T4 ×2** and **Run All**. Expanded inputs also work. Expect three verified model identities at 75,000 updates and a shared 120-frame orbit.
+2. Each T4 handles a disjoint set of camera/model pairs. Frames print with their arm, index and seconds per frame. Measured held-out scoring took 20.95 s/view for dense, 23.23 for sparse vanilla and 20.22 for sparse regularised. At those rates, 360 frames on two T4s project to about 64 minutes of computation. Budget **65–80 minutes wall time**, roughly 2.2–2.7 provisioned GPU-hours. The notebook prints a revised ETA from actual orbit frames.
+3. Save **`lego-s42-stage10-cache.zip`** from Output during rendering. The notebook refreshes this portable snapshot about every 30 new frames and displays an embedded backup around halfway. If interrupted, attach the newest saved cache alongside the original three inputs in a fresh session. Verify that the setup reports the expected reusable frames before rendering resumes.
+4. Send **`lego-s42-stage10-videos.zip`** after all three MP4s report 120 decoded frames. The archive includes the 400 × 400 H.264 movies, the lossless PNG frames, the shared orbit settings, checkpoint identities and payload hashes. Each clip is five seconds at 24 fps. If a cell stops, send the latest cache and traceback.
+
 ## Stage 9. Finish the sparse Lego pair and score it
 
 1. Import [the Stage 9 notebook](kaggle_stage9_lego_sparse_finish_eval.ipynb). Attach the original Stage 0 Lego data/code kit, `lego-sparse-pair-s42-stage8-review.zip`, and the Stage 4 offline LPIPS kit. Select **GPU T4 ×2** and **Run All**. The restore cell should print **2,000** for each arm. The LPIPS probe should report an identical-image distance of zero.
