@@ -1,5 +1,16 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 18. Export the personal-scene videos
+
+1. Import [the Stage 18 notebook](kaggle_stage18_personal_videos.ipynb). Attach the private `personal-input.zip` and `personal-s42-stage17-review.zip` datasets. Select **GPU T4 ×2** and **Run All**. The first cell verifies all three model fingerprints at 75,000 updates.
+2. Allow **30–45 minutes**. Stage 17 took 9.2–9.7 seconds per test view. Rendering 360 frames at those rates on two GPUs projects to about 28–29 minutes before setup and encoding. The render cell prints an updated estimate using actual throughput.
+3. Download `personal-s42-stage18-cache.zip` at the halfway link. If interrupted, attach that cache with both original inputs in a fresh session and run all cells again. Completed frames are reusable.
+4. Each arm should print **120 decoded frames, 24 fps**. Save and return **`personal-s42-stage18-videos.zip`** privately. All three five-second RGB clips use the same interpolated path through the registered test poses. Full-resolution frame order and sampled predictions are reviewed from this archive.
+
+### After Stage 18
+
+Keep the Stage 17 checkpoint archive and Stage 18 movies on durable private storage. The remaining work is local video verification, a private side-by-side comparison, and final assembly of the course report and standalone reproducibility report. Include the measured scores and intervals, dense Lego C4 failure, Chair regularised failure, representative RGB and predicted depth, and links to the matching media and code revision. The reduced experiment uses one seed, representative depth stills and matched RGB videos. The original depth-movie deliverable and larger matrix should be listed among the deviations. Review the course's required upload format, add the submission details and submit through the course portal.
+
 ## Stage 17. Finish and score the personal scene
 
 1. Import [Stage 17](kaggle_stage17_personal_finish.ipynb). Attach the private **personal-input.zip**, **personal-s42-stage16-review.zip** and **stage4-lpips.zip** datasets. Select **GPU T4 ×2**, then **Run All**. Check that all three arm names print **10,000 updates** and that offline LPIPS-Alex reports an identical-image score of zero.

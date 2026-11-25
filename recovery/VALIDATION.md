@@ -302,5 +302,8 @@ Stage 16 passed on both T4s. At 10,000 updates the central training probe measur
 
 Stage 17 loaded the actual 10,000-update states and each arm completed one additional reduced-batch CPU update. Offline LPIPS-Alex passed its weight-hash, identical-image and different-image checks. The 12 test targets gave a mean white-control PSNR of 5.092 dB. The 28 repository tests passed. Full Stage 17 training and held-out predictions require the T4 run.
 
-1. Finish the three healthy runs at 75,000 updates and score all three on the 12 held-out cameras. Review the paired intervals before reporting gap recovery. [Stage 17 notebook](kaggle_stage17_personal_finish.ipynb)
-2. Export matched personal-scene videos from the reviewed endpoints.
+## Stage 17 personal-scene results
+
+All three Stage 16 checkpoints resumed on Kaggle and reached 75,000 updates. Local review verified archive checksums and parent lineage, finite endpoint weights and Adam moments, model identities, frozen test-camera order, the target pixels and the all-white score. All reported means recomputed from the per-view scores. The independent paired analysis matched the returned comparison. Nine representative view-and-arm sets contained the expected target, RGB, predicted depth and opacity PNGs. The personal images and checkpoints are stored privately. [Endpoint measurements](../results/recovery/personal/seed-42/stage17-results.json) · [Cross-scene results](../results/recovery/REPORT.md)
+
+Stage 18 passed local tests with the actual three checkpoints and registered camera model. Six reduced-grid CPU renders exercised two trajectory positions per arm. The first frame matched the reference exporter byte for byte for each model. A separate encoding fixture exercised resuming from an incomplete cache, replacement of a damaged PNG, disjoint work assignment, the three 120-frame H.264 encodes and decodes, archive hashes and expanded-input restore. All 28 repository tests passed. Full-resolution personal trajectory renders and their review remain pending. [Stage 18 notebook](kaggle_stage18_personal_videos.ipynb)
