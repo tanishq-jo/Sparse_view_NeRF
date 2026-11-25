@@ -1,5 +1,12 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 17. Finish and score the personal scene
+
+1. Import [Stage 17](kaggle_stage17_personal_finish.ipynb). Attach the private **personal-input.zip**, **personal-s42-stage16-review.zip** and **stage4-lpips.zip** datasets. Select **GPU T4 ×2**, then **Run All**. Check that all three arm names print **10,000 updates** and that offline LPIPS-Alex reports an identical-image score of zero.
+2. Two workers share the three runs. The 50k exponential learning-rate prefix and 25k hold match the synthetic runs. Each training wave checks checkpoint identity, Adam counters, learning rate and the training-centre controls. The measured personal rates of 5.03–5.14 updates/s project to about 5½ hours of training. Allow **5¾–6½ hours total**, about **11½–13 allocated GPU-hours**.
+3. Save the **step30000**, **step50000** and **step75000** ZIPs when their links appear. Each wave also writes a recoverable snapshot to Output. In a fresh session attach the latest successful Stage 17 ZIP in place of the Stage 16 review, alongside the same two kits.
+4. The scoring cell uses the same 12 test cameras for PSNR, SSIM and calibrated LPIPS-Alex v0.1. It saves three representative target/RGB/depth/opacity sets per arm, scores the eight training cameras of each sparse model, and exports the paired comparison with the proposal's recovery gate. Return **personal-s42-stage17-review.zip** privately. If interrupted, save the latest checkpoint or evaluation snapshot and traceback.
+
 ## Stage 16. Start all three personal-scene runs
 
 1. Import [the Stage 16 notebook](kaggle_stage16_personal.ipynb), attach the private `personal-input.zip` prepared from the registered photos, select **GPU T4 ×2**, and **Run All**. Setup verifies the pixels and camera split and prints the black, white and constant-colour controls for the central rectangle. Expect 64 dense cameras, eight sparse cameras and 12 held out.

@@ -4,7 +4,7 @@
 
 **Chair recovery.** At 75,000 updates, dense vanilla scored **31.706 dB** and eight-view vanilla **24.930 dB** on the same 25 held-out cameras. The matched regularised run stopped at 128, leaving its gap recovery unavailable. [Matched Chair videos](results/recovery/chair/seed-42/videos/comparison.mp4) · [Chair measurements and images](results/recovery/chair/seed-42/README.md) · [Kaggle instructions](recovery/OPERATIONS.md)
 
-**Personal capture.** COLMAP registered 76 of 77 photos in one model with a mean reprojection error of 0.736 px. The frozen split has 64 dense training cameras, an eight-camera subset and 12 held-out cameras. [Registration results](results/recovery/personal/seed-42/registration.json) · [Personal-scene training notebook](recovery/kaggle_stage16_personal.ipynb)
+**Personal capture.** COLMAP registered 76 of 77 photos in one model with a mean reprojection error of 0.736 px. The frozen split has 64 dense training cameras, an eight-camera subset and 12 held-out cameras. All three arms passed the 10,000-update training check. [Registration](results/recovery/personal/seed-42/registration.json) · [Training measurements](results/recovery/personal/seed-42/stage16-health.json) · [Finish and score on Kaggle](recovery/kaggle_stage17_personal_finish.ipynb)
 
 ## Original pilot
 

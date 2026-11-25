@@ -298,5 +298,9 @@ The returned archive passed CRC and SHA-256 checks for all 244 payload files. Th
 
 Stage 16 setup verified the frozen personal kit. Constant-RGB controls measured 16.043 dB for the dense training probe and 16.419 dB for the sparse probe. All three arms started and resumed for two real reduced-size CPU updates. Simulated milestone records tested independent stopping, advancement of the surviving arms, archive hashes, download bytes and restoration in a fresh workspace. The 28 repository tests passed. Full-size personal learning rates and quality require Kaggle.
 
-1. Run the three personal-scene arms through their training checks and review the first 10,000 updates of each passing arm. [Stage 16 notebook](kaggle_stage16_personal.ipynb)
-2. Finish viable personal runs at 75,000 updates, score their 12 held-out views and export matched videos. Calculate recovery only when the matched runs and uncertainty criteria support it.
+Stage 16 passed on both T4s. At 10,000 updates the central training probe measured 21.013 dB for dense vanilla, 27.122 dB for sparse vanilla and 22.062 dB for sparse regularised. Dense uses a different set of training cameras from the sparse arms. The best single-colour controls were 16.043 and 16.419 dB for the dense and sparse probes, respectively. Local review verified archive hashes, checkpoint identities, finite weights and Adam moments, both stored RNG states, previews and CPU rerenders of the fixed rays. [Stage 16 evidence](../results/recovery/personal/seed-42/stage16-health.json)
+
+Stage 17 loaded the actual 10,000-update states and each arm completed one additional reduced-batch CPU update. Offline LPIPS-Alex passed its weight-hash, identical-image and different-image checks. The 12 test targets gave a mean white-control PSNR of 5.092 dB. The 28 repository tests passed. Full Stage 17 training and held-out predictions require the T4 run.
+
+1. Finish the three healthy runs at 75,000 updates and score all three on the 12 held-out cameras. Review the paired intervals before reporting gap recovery. [Stage 17 notebook](kaggle_stage17_personal_finish.ipynb)
+2. Export matched personal-scene videos from the reviewed endpoints.
