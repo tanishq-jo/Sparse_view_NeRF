@@ -1,0 +1,85 @@
+{
+  "scene": "chair",
+  "seed": 42,
+  "updates": 75000,
+  "views": 25,
+  "source_zip_sha256": "a72279eb79269b062fd651a1187aad6f645d66b19814e24e8186da94a000c74e",
+  "comparison_hash": "bb2f4e6e9ececfb0041758aa3ec55fbb399fceb70757dab60d1f561b8ee60617",
+  "arms": {
+    "dense-vanilla": {
+      "checkpoint_sha256": "5084e6de9fd55e9110d58397b782dda018e7eaaedaaa7875e22c80ed5fcda12c",
+      "model_sha256": "8450e1b53a0877ea5d156fcc1aa91c59219697beed9cc5b3e771085963a52188",
+      "mean": {
+        "foreground_opacity": 0.9926453351974487,
+        "foreground_psnr": 24.89380740123839,
+        "lpips": 0.03636369828134775,
+        "psnr": 31.70643007338598,
+        "ssim": 0.9641013009115329,
+        "white_foreground_psnr": 7.107179562929974,
+        "white_psnr": 14.08467234323081
+      },
+      "test_seconds": 515.859745075999
+    },
+    "sparse-vanilla": {
+      "checkpoint_sha256": "759b680074f42ecbea7357b6699d14d60e79d34388361c2c4af1abdef1f3b083",
+      "model_sha256": "6280b35e68ce0d91240b2736964e346082a88693b060b304dd7cedf9c99cab9c",
+      "mean": {
+        "foreground_opacity": 0.9705143880844116,
+        "foreground_psnr": 18.373994010676086,
+        "lpips": 0.10783317789435387,
+        "psnr": 24.92950856966406,
+        "ssim": 0.895854470585683,
+        "white_foreground_psnr": 7.107179562929974,
+        "white_psnr": 14.08467234323081
+      },
+      "test_seconds": 603.5704649399995,
+      "training_views": {
+        "frames": [
+          {
+            "frame": "train/r_26.png",
+            "psnr": 30.82189217331809
+          },
+          {
+            "frame": "train/r_86.png",
+            "psnr": 35.16835168560321
+          },
+          {
+            "frame": "train/r_2.png",
+            "psnr": 32.46007215249943
+          },
+          {
+            "frame": "train/r_55.png",
+            "psnr": 31.522599722696466
+          },
+          {
+            "frame": "train/r_75.png",
+            "psnr": 30.761449570366374
+          },
+          {
+            "frame": "train/r_93.png",
+            "psnr": 34.14046346732418
+          },
+          {
+            "frame": "train/r_16.png",
+            "psnr": 33.58550040399456
+          },
+          {
+            "frame": "train/r_73.png",
+            "psnr": 34.551553784490416
+          }
+        ],
+        "mean_psnr": 32.87648537003659,
+        "at_least_30_db": true
+      }
+    }
+  },
+  "dense_minus_sparse_psnr_db": 6.776921503721922,
+  "paired_view_bootstrap_95": [
+    5.624350830219121,
+    7.894263668712864
+  ],
+  "bootstrap_draws": 10000,
+  "bootstrap_seed": 42,
+  "regularized_gap_recovery_percent": null,
+  "reason": "The matched regularised arm stopped before its endpoint."
+}

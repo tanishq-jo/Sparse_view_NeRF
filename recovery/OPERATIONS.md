@@ -1,5 +1,11 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 15. Export the two matched Chair videos
+
+1. Import [the Stage 15 notebook](kaggle_stage15_chair_videos.ipynb). Attach the original Chair kit and `chair-vanilla-pair-s42-stage14-review.zip`. Select **GPU T4 ×2** and **Run All**. Setup verifies both 75,000-update models, their scoring protocol and the camera trajectory.
+2. Each model renders 120 frames. The measured Chair scoring rates of 20.6 and 24.1 seconds per view project to about 45 minutes across two GPUs. Allow **45–60 minutes** including staging and encoding. Both five-second movies follow the same orbit at 24 fps.
+3. Save `chair-s42-stage15-cache.zip` at the halfway link. After an interruption, reattach the latest cache alongside both inputs and rerun. Send **`chair-s42-stage15-videos.zip`** when both clips report 120 decoded frames, or the latest cache and traceback on failure.
+
 ## Stage 14. Finish and score both Chair baselines
 
 1. Import [the Stage 14 notebook](kaggle_stage14_chair_vanilla_finish.ipynb). Attach the original Chair kit, `chair-s42-stage13-review.zip`, and the Stage 4 offline LPIPS kit. Choose **GPU T4 ×2** and **Run All**. Setup should restore dense vanilla and eight-view vanilla at **2,000** and verify the official 25 test targets.

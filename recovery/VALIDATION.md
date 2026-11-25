@@ -292,6 +292,8 @@ All three personal-scene arm configurations completed a 16-ray Adam update on CP
 
 ## Remaining experimental stages
 
-1. Finish and score the two native Chair baselines. Dense and eight-view vanilla passed at 2,000 updates. First-band and near-only both reproduced the white foreground at 500. [Stage 13 measurements](../results/recovery/chair/seed-42/stage13-health.json) · [Stage 14 notebook](kaggle_stage14_chair_vanilla_finish.ipynb)
+The Stage 15 CPU check rendered two reduced-resolution orbit positions from each real Chair checkpoint. Frame zero matched the original video exporter byte for byte for both models. A cache fixture exercised damaged-frame repair, split rendering work across two processes, and encoded and decoded two 120-frame H.264 clips. Full-resolution orbit renders remain for Kaggle. All 28 repository tests passed.
+
+1. Export and review the two matched Chair videos. Both Stage 14 endpoints, Adam states, score identities, ordered test image hashes, white controls, returned metric means and representative image dimensions passed local verification. [Held-out measurements](../results/recovery/chair/seed-42/README.md) · [Video notebook](kaggle_stage15_chair_videos.ipynb)
 2. Complete the remaining feasible 75,000-update runs. Report the original Chair regularised failure and label any later protocol amendment. Record held-out scores, images, matched videos and time for completed runs. Calculate recovery only for an eligible matched comparison.
 3. Run the first full-batch T4 health check on the accepted personal capture before its longer experiments.

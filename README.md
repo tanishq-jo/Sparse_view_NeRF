@@ -2,7 +2,7 @@
 
 **Lego recovery results.** At 75,000 updates, dense vanilla scored **29.645 dB**, eight-view vanilla **25.618 dB** and eight-view regularised **25.353 dB** on the same 25 held-out cameras. The regularised arm widened the dense-to-sparse PSNR gap by 0.265 dB on seed 42. The dense reference missed C4 by 0.895 dB. All three matched Lego videos are available. [Matched Lego results](results/recovery/lego/seed-42/README.md) · [Lego comparison video](results/recovery/lego/seed-42/videos/comparison.mp4)
 
-**Chair recovery.** At 2,000 updates, dense vanilla scored 17.514 dB and sparse vanilla 19.099 dB on their fixed training foregrounds. The original two-term run stopped at 128. Its bounded replay and three diagnostic variants all scored at the sparse white control at update 500. Stage 14 continues the two healthy vanilla arms to 75,000 and scores both on the same 25 held-out views. [Chair checkpoint measurements](results/recovery/chair/seed-42/stage13-health.json) · [Kaggle instructions](recovery/OPERATIONS.md)
+**Chair recovery.** At 75,000 updates, dense vanilla scored **31.706 dB** and eight-view vanilla **24.930 dB** on the same 25 held-out cameras. The matched regularised run stopped at 128, leaving its gap recovery unavailable. [Chair measurements and images](results/recovery/chair/seed-42/README.md) · [Kaggle instructions](recovery/OPERATIONS.md)
 
 **Personal capture.** COLMAP registered 76 of 77 photos in one model with a mean reprojection error of 0.736 px. The frozen split has 64 dense training cameras, an eight-camera subset and 12 held-out cameras. [Registration results](results/recovery/personal/seed-42/registration.json)
 
