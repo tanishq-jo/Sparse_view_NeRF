@@ -1,0 +1,48 @@
+{
+  "archive_sha256": "186546b68843e9ade2d313d0b3c4c9aa31bec50e92aafd8a7919a3bd16bc20f7",
+  "trajectory": {
+    "data_hash": "9c0224042d8d8060a2684ad70e6edfdf74f7b5acbd159aaa90142581c4e561e4",
+    "downscale": 2,
+    "frames": 120,
+    "fps": 24,
+    "path": "blender-orbit-v1"
+  },
+  "trajectory_hash": "714db32efd391a6e037ee7a829f1d9c55784e07b9f781709d20d83a41a6cfd1a",
+  "render_segment": {
+    "start_count": 0,
+    "end_count": 240,
+    "seconds": 2657.3794502120004
+  },
+  "videos": {
+    "dense-vanilla": {
+      "file": "dense-vanilla.mp4",
+      "sha256": "19f128fc27ea5b36d3ba1de70e82b5ce7c914e83df6ef010e12f1052f5dd1393",
+      "run_id": "8c551921bbcf12bee067341cf5928bdf",
+      "checkpoint_sha256": "5084e6de9fd55e9110d58397b782dda018e7eaaedaaa7875e22c80ed5fcda12c",
+      "model_sha256": "8450e1b53a0877ea5d156fcc1aa91c59219697beed9cc5b3e771085963a52188",
+      "size": [
+        400,
+        400
+      ],
+      "codec": "H.264",
+      "decoded_frames": 120,
+      "fps": 24.0,
+      "seconds": 5.0
+    },
+    "sparse-vanilla": {
+      "file": "sparse-vanilla.mp4",
+      "sha256": "87dac8eb94491d39d2fc3e5f553f5740c006cf36ae2664237c91adbd8945edde",
+      "run_id": "5017ddcc76091a2ea6190e7f5458bbf4",
+      "checkpoint_sha256": "759b680074f42ecbea7357b6699d14d60e79d34388361c2c4af1abdef1f3b083",
+      "model_sha256": "6280b35e68ce0d91240b2736964e346082a88693b060b304dd7cedf9c99cab9c",
+      "size": [
+        400,
+        400
+      ],
+      "codec": "H.264",
+      "decoded_frames": 120,
+      "fps": 24.0,
+      "seconds": 5.0
+    }
+  }
+}

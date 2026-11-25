@@ -1,5 +1,12 @@
 # Kaggle training and checkpoint handoff
 
+## Stage 16. Start all three personal-scene runs
+
+1. Import [the Stage 16 notebook](kaggle_stage16_personal.ipynb), attach the private `personal-input.zip` prepared from the registered photos, select **GPU T4 ×2**, and **Run All**. Setup verifies the pixels and camera split and prints the black, white and constant-colour controls for the central rectangle. Expect 64 dense cameras, eight sparse cameras and 12 held out.
+2. All arms use the original 512-ray training batch. Sparse regularised uses frequency annealing and the near-camera penalty. The workers check gradients, opacity and improvement over initialisation at 500 and 2,000. The centre must beat both black and white by over 3 dB, and from 2,000 onward it must also beat the best single RGB colour on those sampled pixels. These are training-only diagnostics on photographs without foreground masks.
+3. Passing arms continue to **10,000**. A failing arm is recorded and excluded from later waves. Allow **45–65 minutes** on T4 ×2 using the earlier 5.4–6.5 updates/s on Chair as a proxy. The notebook prints per-arm measured rates. Trainer messages about remaining time refer to the full training prefix.
+4. Download **`personal-s42-stage16-step2000.zip`** when offered. Keep the final **`personal-s42-stage16-review.zip`** private and return it even if one or more arms stopped. After an interruption attach the latest completed snapshot alongside the original input and rerun. Send the traceback as well if execution raised.
+
 ## Stage 15. Export the two matched Chair videos
 
 1. Import [the Stage 15 notebook](kaggle_stage15_chair_videos.ipynb). Attach the original Chair kit and `chair-vanilla-pair-s42-stage14-review.zip`. Select **GPU T4 ×2** and **Run All**. Setup verifies both 75,000-update models, their scoring protocol and the camera trajectory.

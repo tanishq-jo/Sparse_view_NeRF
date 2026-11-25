@@ -290,10 +290,13 @@ The personal capture supplied 77 distinct 960 × 1280 images. PyCOLMAP 4.2.1 reg
 
 All three personal-scene arm configurations completed a 16-ray Adam update on CPU with the frozen camera model. The coarse and fine colour and density heads had nonzero finite gradients in each arm. This checks input and optimiser compatibility. Sustained learning and held-out quality on the personal scene still require GPU measurements.
 
+## Stage 15 Chair video results
+
+The returned archive passed CRC and SHA-256 checks for all 244 payload files. The two checkpoints matched Stage 14. Both five-second H.264 movies decoded to 120 frames and matched the order of all 240 lossless PNGs. CPU replay at positions 7, 41 and 89 matched the sampled source RGB values exactly for both models. The two T4s took 2,657.4 seconds to render the orbit. [Matched movies and hashes](../results/recovery/chair/seed-42/videos/index.json)
+
 ## Remaining experimental stages
 
-The Stage 15 CPU check rendered two reduced-resolution orbit positions from each real Chair checkpoint. Frame zero matched the original video exporter byte for byte for both models. A cache fixture exercised damaged-frame repair, split rendering work across two processes, and encoded and decoded two 120-frame H.264 clips. Full-resolution orbit renders remain for Kaggle. All 28 repository tests passed.
+Stage 16 setup verified the frozen personal kit. Constant-RGB controls measured 16.043 dB for the dense training probe and 16.419 dB for the sparse probe. All three arms started and resumed for two real reduced-size CPU updates. Simulated milestone records tested independent stopping, advancement of the surviving arms, archive hashes, download bytes and restoration in a fresh workspace. The 28 repository tests passed. Full-size personal learning rates and quality require Kaggle.
 
-1. Export and review the two matched Chair videos. Both Stage 14 endpoints, Adam states, score identities, ordered test image hashes, white controls, returned metric means and representative image dimensions passed local verification. [Held-out measurements](../results/recovery/chair/seed-42/README.md) · [Video notebook](kaggle_stage15_chair_videos.ipynb)
-2. Complete the remaining feasible 75,000-update runs. Report the original Chair regularised failure and label any later protocol amendment. Record held-out scores, images, matched videos and time for completed runs. Calculate recovery only for an eligible matched comparison.
-3. Run the first full-batch T4 health check on the accepted personal capture before its longer experiments.
+1. Run the three personal-scene arms through their training checks and review the first 10,000 updates of each passing arm. [Stage 16 notebook](kaggle_stage16_personal.ipynb)
+2. Finish viable personal runs at 75,000 updates, score their 12 held-out views and export matched videos. Calculate recovery only when the matched runs and uncertainty criteria support it.

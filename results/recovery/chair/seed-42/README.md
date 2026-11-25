@@ -16,3 +16,7 @@ The rows below show test frames r_0, r_96 and r_192. The eight-view RGB shows st
 ![Three held-out Chair views with targets, both RGB reconstructions and sparse depth](held-out-comparison.png)
 
 [Per-view metrics](held-out.csv) · [Full-size target, RGB, depth and opacity PNGs for both arms](held-out-examples.zip) · [Endpoint identities and measurements](stage14-results.json)
+
+## Matched orbit videos
+
+Both 75,000-update checkpoints follow the same 120 camera poses at 400 × 400 and 24 fps. The two T4s rendered all 240 images in 44.3 minutes. Each decoded movie frame was checked against the corresponding source PNG. Reduced CPU renders from three orbit positions per model reproduced the sampled source pixels exactly. [Side-by-side comparison](videos/comparison.mp4) · [Dense vanilla](videos/dense-vanilla.mp4) · [Eight-view vanilla](videos/sparse-vanilla.mp4) · [Trajectory and hashes](videos/index.json)
