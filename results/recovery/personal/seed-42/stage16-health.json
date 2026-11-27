@@ -1,0 +1,60 @@
+{
+  "scope": "fixed central training rays",
+  "archive_sha256": "2dab34989c13fcc9c208808712dd40023df4c039517cc05138c84ee8b59546a6",
+  "receipt_sha256": "44113c4ffc5cce0b87ed87de291c2052455edb5a7048781d0ecc9f8d3e807919",
+  "data_hash": "d39c6ff67262904660cf715ea3ba6cdbd17ae3a0cf07a1b83a917cbb50dbe8ae",
+  "schedule_hash": "280e2b9ada481e2844b471404f1d99eac4fff5a35bc069cc4385327b3a1cc3a9",
+  "arms": {
+    "dense-vanilla": {
+      "step": 10000,
+      "run_id": "c23621d6ebb84aad9b02399c5f68d962",
+      "checkpoint_sha256": "98d992948ffb77b929e2e1cdfc03b9c33111a041e5a00886ebbd225e2689a4a8",
+      "passed": true,
+      "health_step": 10000,
+      "white_psnr": 5.386597168667672,
+      "fine_psnr": 21.012825424991508,
+      "center_opacity": 0.9858216643333435,
+      "outside_opacity": 0.9745419025421143,
+      "controls": {
+        "black": 5.432834960955936,
+        "white": 5.386597168667672,
+        "constant": 16.043457667854355
+      },
+      "last_steps_per_s": 5.143277389363428
+    },
+    "sparse-vanilla": {
+      "step": 10000,
+      "run_id": "50aaf67f3ca74053a65beedfa5eb2fda",
+      "checkpoint_sha256": "9ad88bd116bf624628fa386bd4a09e3643216b493d95dbe51e138f0260bdbda0",
+      "passed": true,
+      "health_step": 10000,
+      "white_psnr": 5.300953954539266,
+      "fine_psnr": 27.12217688849701,
+      "center_opacity": 0.9818769693374634,
+      "outside_opacity": 0.9525607824325562,
+      "controls": {
+        "black": 5.7147920218809745,
+        "white": 5.300954393201087,
+        "constant": 16.41939352983131
+      },
+      "last_steps_per_s": 5.031069948809378
+    },
+    "sparse-regularized": {
+      "step": 10000,
+      "run_id": "dd192d6510d84ec59ddec68f1ddc8c50",
+      "checkpoint_sha256": "00c6cefbfa7f13facb0f28ab9a7a2a00d6b874da5935b237cff5c17e0d8e1947",
+      "passed": true,
+      "health_step": 10000,
+      "white_psnr": 5.300953954539266,
+      "fine_psnr": 22.06245293559075,
+      "center_opacity": 0.9408100843429565,
+      "outside_opacity": 0.9330519437789917,
+      "controls": {
+        "black": 5.7147920218809745,
+        "white": 5.300954393201087,
+        "constant": 16.41939352983131
+      },
+      "last_steps_per_s": 5.125256457150959
+    }
+  }
+}

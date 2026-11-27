@@ -1,5 +1,13 @@
 # Sparse-view NeRF with a frequency regularisation prior
 
+**Lego recovery results.** At 75,000 updates, dense vanilla scored **29.645 dB**, eight-view vanilla **25.618 dB** and eight-view regularised **25.353 dB** on the same 25 held-out cameras. The regularised arm widened the dense-to-sparse PSNR gap by 0.265 dB on seed 42. The dense reference missed C4 by 0.895 dB. All three matched Lego videos are available. [Matched Lego results](results/recovery/lego/seed-42/README.md) · [Lego comparison video](results/recovery/lego/seed-42/videos/comparison.mp4)
+
+**Chair recovery.** At 75,000 updates, dense vanilla scored **31.706 dB** and eight-view vanilla **24.930 dB** on the same 25 held-out cameras. The matched regularised run stopped at 128, leaving its gap recovery unavailable. [Matched Chair videos](results/recovery/chair/seed-42/videos/comparison.mp4) · [Chair measurements and images](results/recovery/chair/seed-42/README.md) · [Kaggle instructions](recovery/OPERATIONS.md)
+
+**Personal capture.** COLMAP registered 76 of 77 photos in one model with a mean reprojection error of 0.736 px. The frozen split has 64 dense training cameras, an eight-camera subset and 12 held-out cameras. At 75,000 updates, dense vanilla scored 20.045 dB, eight-view vanilla 16.433 dB and regularised 16.522 dB. The interval for the regularised gain includes zero. [Cross-scene results](results/recovery/REPORT.md) · [Personal endpoint evidence](results/recovery/personal/seed-42/stage17-results.json) · [Personal video export](recovery/kaggle_stage18_personal_videos.ipynb)
+
+## Original pilot
+
 Train the same hierarchical NeRF on 100 views and on eight views. Then train the eight-view version again with **FreeNeRF frequency annealing**. The experiment measures how much of the observed 100-to-eight-view gap this one intervention recovers on Lego, Chair, and an object you photograph. Each scene gets three checkpoints, held-out PSNR and LPIPS scores, and two matched-camera movies.
 
 | Run | Training images | Encoding during training | What it measures |
@@ -12,7 +20,7 @@ The renderer and optimiser are implemented in PyTorch. Nerfstudio supplies the c
 
 ## What is already in this workspace
 
-Lego and Chair are downloaded under `data/blender`, with frozen manifests in `manifests/`. A **one-seed CPU pilot** ran all three protocols on each scene at 80 × 80, 1,000 steps and 96 rays per update. Each of the six models was evaluated on all 200 official test cameras. The full 400-pixel, 50,000-step experiment and the self-captured scene remain to be run. The pilot's small dense advantage on Lego makes its recovery percentage particularly sensitive to the denominator.
+Lego and Chair are downloaded under `data/blender`, with frozen manifests in `manifests/`. A **one-seed CPU pilot** ran all three protocols on each scene at 80 × 80, 1,000 steps and 96 rays per update. Each of the six models was evaluated on all 200 official test cameras. The pilot's small dense advantage on Lego makes its recovery percentage particularly sensitive to the denominator.
 
 | Scene | 100-view vanilla PSNR / LPIPS | 8-view vanilla PSNR / LPIPS | 8-view annealed PSNR / LPIPS | Pilot movies |
 | --- | --- | --- | --- | --- |

@@ -1,0 +1,273 @@
+{
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 42,
+  "confidence": 0.95,
+  "scenes": [
+    {
+      "scene": "lego",
+      "comparison_hash": "8af966afa806cd4ddfd2c841e442e764e8c9983f80f215c6ff0a2f89c300d71c",
+      "comparison": {
+        "version": 1,
+        "data_hash": "bdc22418467720a3dbf5555318532caf17c250a05433f8553ae58372f11e89e2",
+        "training_config": {
+          "backend": "recovery-pytorch-finite-softplus-v1",
+          "implementation_hash": "4b85a7f9d5836739fb562c5fb3ff25fa68b063073bbea539e38ed1130f088eb5",
+          "preset": "main",
+          "steps": 75000,
+          "batch_size": 512,
+          "model": {
+            "width": 256,
+            "depth": 8,
+            "pos_bands": 10,
+            "dir_bands": 4,
+            "coarse_samples": 64,
+            "fine_samples": 128,
+            "anneal_fraction": 0.5
+          },
+          "near_samples": 20,
+          "occ_weight": 0.01,
+          "lr": 5e-05,
+          "lr_final": 5e-05,
+          "downscale": 2,
+          "optimizer": "Adam",
+          "sampling": "uniform pixels",
+          "precision": "fp32-highest",
+          "prefix_config": {
+            "backend": "recovery-pytorch-finite-softplus-v1",
+            "implementation_hash": "4b85a7f9d5836739fb562c5fb3ff25fa68b063073bbea539e38ed1130f088eb5",
+            "preset": "main",
+            "steps": 50000,
+            "batch_size": 512,
+            "model": {
+              "width": 256,
+              "depth": 8,
+              "pos_bands": 10,
+              "dir_bands": 4,
+              "coarse_samples": 64,
+              "fine_samples": 128,
+              "anneal_fraction": 0.5
+            },
+            "near_samples": 20,
+            "occ_weight": 0.01,
+            "lr": 0.0005,
+            "lr_final": 5e-05,
+            "downscale": 2,
+            "optimizer": "Adam",
+            "sampling": "uniform pixels",
+            "precision": "fp32-highest"
+          },
+          "prefix_updates": 50000,
+          "schedule": "50k-exponential-then-25k-hold-v1"
+        },
+        "test_ids": [
+          "test/r_0.png",
+          "test/r_8.png",
+          "test/r_16.png",
+          "test/r_24.png",
+          "test/r_32.png",
+          "test/r_40.png",
+          "test/r_48.png",
+          "test/r_56.png",
+          "test/r_64.png",
+          "test/r_72.png",
+          "test/r_80.png",
+          "test/r_88.png",
+          "test/r_96.png",
+          "test/r_104.png",
+          "test/r_112.png",
+          "test/r_120.png",
+          "test/r_128.png",
+          "test/r_136.png",
+          "test/r_144.png",
+          "test/r_152.png",
+          "test/r_160.png",
+          "test/r_168.png",
+          "test/r_176.png",
+          "test/r_184.png",
+          "test/r_192.png"
+        ],
+        "width": 400,
+        "height": 400,
+        "near": 2.0,
+        "far": 6.0,
+        "white_background": true,
+        "render": "fine deterministic fp32",
+        "psnr": "sRGB [0,1], mean per-view dB, MSE floor 1e-12",
+        "ssim": "sRGB [0,1], RGB mean, 7x7 uniform valid windows, sample covariance, K1=.01 K2=.03",
+        "lpips": "AlexNet v0.1, lpips 0.1.4, sRGB mapped to [-1,1]",
+        "foreground": "Blender alpha resized with Lanczos, >=128/255; unavailable for RGB captures",
+        "depth": "camera-axis z, residual transmittance at far, PNG16 black=near white=far",
+        "lpips_weights_sha256": "913e6288d265ca661f26fe0426b840bc69bafcf9fcda0fb2c99586891562ea9e",
+        "target_hash": "d749094281b2181931225c785bd6914831a0fae89394dd212d7c0ade5e1bb26f"
+      },
+      "train_views": {
+        "dense-vanilla": 100,
+        "sparse-vanilla": 8,
+        "sparse-regularized": 8
+      },
+      "test_frames": [
+        "test/r_0.png",
+        "test/r_8.png",
+        "test/r_16.png",
+        "test/r_24.png",
+        "test/r_32.png",
+        "test/r_40.png",
+        "test/r_48.png",
+        "test/r_56.png",
+        "test/r_64.png",
+        "test/r_72.png",
+        "test/r_80.png",
+        "test/r_88.png",
+        "test/r_96.png",
+        "test/r_104.png",
+        "test/r_112.png",
+        "test/r_120.png",
+        "test/r_128.png",
+        "test/r_136.png",
+        "test/r_144.png",
+        "test/r_152.png",
+        "test/r_160.png",
+        "test/r_168.png",
+        "test/r_176.png",
+        "test/r_184.png",
+        "test/r_192.png"
+      ],
+      "seeds": [
+        42
+      ],
+      "arms": {
+        "dense-vanilla": {
+          "psnr": {
+            "mean": 29.645220320772786,
+            "ci95": [
+              29.212821956353682,
+              30.045054692462003
+            ]
+          },
+          "ssim": {
+            "mean": 0.9400378511124474,
+            "ci95": [
+              0.9372940452922344,
+              0.9426093111266066
+            ]
+          },
+          "lpips": {
+            "mean": 0.040947258025407794,
+            "ci95": [
+              0.03871622998639942,
+              0.04329935777559876
+            ]
+          }
+        },
+        "sparse-vanilla": {
+          "psnr": {
+            "mean": 25.61825237230323,
+            "ci95": [
+              24.615165299824934,
+              26.625559586975246
+            ]
+          },
+          "ssim": {
+            "mean": 0.8943745645720925,
+            "ci95": [
+              0.8807021465630835,
+              0.9077460683207531
+            ]
+          },
+          "lpips": {
+            "mean": 0.07882468804717063,
+            "ci95": [
+              0.06403194921836257,
+              0.0944477595090866
+            ]
+          }
+        },
+        "sparse-regularized": {
+          "psnr": {
+            "mean": 25.35330813563249,
+            "ci95": [
+              24.535379770759835,
+              26.18000912778253
+            ]
+          },
+          "ssim": {
+            "mean": 0.8831030324751861,
+            "ci95": [
+              0.871212043628654,
+              0.8950344198251584
+            ]
+          },
+          "lpips": {
+            "mean": 0.08089647486805916,
+            "ci95": [
+              0.07147758721932769,
+              0.0904835050702095
+            ]
+          }
+        }
+      },
+      "per_seed": [
+        {
+          "seed": 42,
+          "arm": "dense-vanilla",
+          "psnr": 29.645220320772786,
+          "ssim": 0.9400378511124474,
+          "lpips": 0.040947258025407794
+        },
+        {
+          "seed": 42,
+          "arm": "sparse-vanilla",
+          "psnr": 25.61825237230323,
+          "ssim": 0.8943745645720925,
+          "lpips": 0.07882468804717063
+        },
+        {
+          "seed": 42,
+          "arm": "sparse-regularized",
+          "psnr": 25.35330813563249,
+          "ssim": 0.8831030324751861,
+          "lpips": 0.08089647486805916
+        }
+      ],
+      "paired": {
+        "psnr": {
+          "gap": 4.026967948469558,
+          "gap_ci95": [
+            3.1925556827338504,
+            4.886744952430781
+          ],
+          "gain": -0.26494423667073974,
+          "gain_ci95": [
+            -0.5106609150527461,
+            -0.0018913310747052344
+          ],
+          "recovery_pct": -6.579248706745513,
+          "recovery_pct_ci95": [
+            -15.649772001181153,
+            -0.03738305198072883
+          ],
+          "withheld_reason": null
+        },
+        "lpips": {
+          "gap": 0.03787743002176284,
+          "gap_ci95": [
+            0.022956035461276766,
+            0.05414695489034056
+          ],
+          "gain": -0.00207178682088853,
+          "gain_ci95": [
+            -0.009594734832644461,
+            0.00683459127694368
+          ],
+          "recovery_pct": -5.469713282284899,
+          "recovery_pct_ci95": [
+            -39.63950627501722,
+            13.149440761841461
+          ],
+          "withheld_reason": null
+        }
+      },
+      "uncertainty": "paired test views conditional on this one seed"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "source_zip_sha256": "f31dad8be4dcdebca9cfb37ba1b79de4980251ba28c9ed4a2d0e0187dae48302",
+  "seed": 42,
+  "updates": 75000,
+  "views": 12,
+  "comparison_hash": "2c7f7d983bd7eabc168279d25efd7aa9aea7b19a4af3e28400e8c57a5d7e53b0",
+  "arms": {
+    "dense-vanilla": {
+      "checkpoint_sha256": "f5c8c8251442b43717be7f519e3321afd443b8adb8fa08b3d6d094e64b2acb33",
+      "model_sha256": "85fd7bcac9b755331c6d056674319532121ad287a3483b27bba8151250c48274",
+      "mean": {
+        "lpips": 0.3683898486196995,
+        "psnr": 20.045000132647754,
+        "ssim": 0.6602352170557678,
+        "white_psnr": 5.0920720307028855
+      },
+      "test_seconds": 116.77433913700224
+    },
+    "sparse-vanilla": {
+      "checkpoint_sha256": "ad840a886b76d7e6115ead08cbfc7953c66aa06f753bc72aac3840d0110e301f",
+      "model_sha256": "8080987713d26ac100270118036bbfea07212f46422bf73d145da5e105666254",
+      "mean": {
+        "lpips": 0.4731808925668399,
+        "psnr": 16.43328556399188,
+        "ssim": 0.5245094552373454,
+        "white_psnr": 5.0920720307028855
+      },
+      "test_seconds": 110.15646256100081,
+      "training_views": {
+        "frames": [
+          {
+            "frame": "images/view_002.jpg",
+            "psnr": 33.61113458762013
+          },
+          {
+            "frame": "images/view_005.jpg",
+            "psnr": 34.86284777867455
+          },
+          {
+            "frame": "images/view_008.jpg",
+            "psnr": 35.15804442770796
+          },
+          {
+            "frame": "images/view_015.jpg",
+            "psnr": 33.77636771459197
+          },
+          {
+            "frame": "images/view_027.jpg",
+            "psnr": 35.480826058686134
+          },
+          {
+            "frame": "images/view_043.jpg",
+            "psnr": 34.13948725746321
+          },
+          {
+            "frame": "images/view_071.jpg",
+            "psnr": 34.483926953350355
+          },
+          {
+            "frame": "images/view_076.jpg",
+            "psnr": 33.96309186289315
+          }
+        ],
+        "mean_psnr": 34.43446583012343,
+        "at_least_30_db": true
+      }
+    },
+    "sparse-regularized": {
+      "checkpoint_sha256": "5748f503c696d3eacdfaf66cba24f7261e695a07624da59eb510d25c361978ec",
+      "model_sha256": "562662d5c22a1964a7c53f3d568e43e1c44b62e8779a0e1000121b80a18ad9dc",
+      "mean": {
+        "lpips": 0.5183091312646866,
+        "psnr": 16.521668622167937,
+        "ssim": 0.511920814922175,
+        "white_psnr": 5.0920720307028855
+      },
+      "test_seconds": 112.45160280299751,
+      "training_views": {
+        "frames": [
+          {
+            "frame": "images/view_002.jpg",
+            "psnr": 30.39772428469687
+          },
+          {
+            "frame": "images/view_005.jpg",
+            "psnr": 31.823974332339475
+          },
+          {
+            "frame": "images/view_008.jpg",
+            "psnr": 31.94477406680296
+          },
+          {
+            "frame": "images/view_015.jpg",
+            "psnr": 30.749781942311113
+          },
+          {
+            "frame": "images/view_027.jpg",
+            "psnr": 30.80812828249128
+          },
+          {
+            "frame": "images/view_043.jpg",
+            "psnr": 30.910150330310916
+          },
+          {
+            "frame": "images/view_071.jpg",
+            "psnr": 31.127542381451402
+          },
+          {
+            "frame": "images/view_076.jpg",
+            "psnr": 31.192232238195935
+          }
+        ],
+        "mean_psnr": 31.119288482324993,
+        "at_least_30_db": true
+      }
+    }
+  },
+  "paired": {
+    "psnr": {
+      "gap": 3.6117145686558736,
+      "gap_ci95": [
+        2.2237023499019752,
+        4.983006557800682
+      ],
+      "gain": 0.08838305817605985,
+      "gain_ci95": [
+        -0.19973983309723917,
+        0.4186911880873903
+      ],
+      "recovery_pct": 2.4471219000274504,
+      "recovery_pct_ci95": [
+        -6.161088187385165,
+        13.138154972397246
+      ],
+      "withheld_reason": null
+    },
+    "lpips": {
+      "gap": 0.1047910439471404,
+      "gap_ci95": [
+        0.06184269183625776,
+        0.1464075791959961
+      ],
+      "gain": -0.04512823869784671,
+      "gain_ci95": [
+        -0.0808871095379194,
+        -0.011592740689714772
+      ],
+      "recovery_pct": -43.06497673657177,
+      "recovery_pct_ci95": [
+        -77.10101403705669,
+        -13.017499788912142
+      ],
+      "withheld_reason": null
+    }
+  }
+}

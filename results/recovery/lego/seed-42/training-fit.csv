@@ -1,0 +1,17 @@
+protocol,frame,psnr
+sparse-vanilla,train/r_26.png,33.692043960599364
+sparse-vanilla,train/r_86.png,32.145881358632586
+sparse-vanilla,train/r_2.png,32.47089510245792
+sparse-vanilla,train/r_55.png,32.796904543383846
+sparse-vanilla,train/r_75.png,33.833607122287226
+sparse-vanilla,train/r_93.png,31.789715932392753
+sparse-vanilla,train/r_16.png,31.83309005080038
+sparse-vanilla,train/r_73.png,31.646619165472774
+sparse-regularized,train/r_26.png,31.220917547297983
+sparse-regularized,train/r_86.png,29.68207850474537
+sparse-regularized,train/r_2.png,30.24809123449964
+sparse-regularized,train/r_55.png,30.665038625393812
+sparse-regularized,train/r_75.png,31.82052933266817
+sparse-regularized,train/r_93.png,29.391719243644914
+sparse-regularized,train/r_16.png,29.842395009762658
+sparse-regularized,train/r_73.png,29.420001062904962
